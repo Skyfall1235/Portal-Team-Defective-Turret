@@ -28,16 +28,15 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        
+        print(velocity);
         if(IsGrounded(velocity))
         {
             velocity.y = -2f;
         }
 
-
         Move();
-
+        Crouch(controller);
+   
         if(Input.GetKeyDown(KeyCode.Space) && IsGrounded(velocity))
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
@@ -45,9 +44,8 @@ public class PlayerMovement : MonoBehaviour
 
         
         velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
-
         
+        controller.Move(velocity * Time.deltaTime);
     }
 
     private bool IsGrounded(Vector3 velocity)
@@ -62,6 +60,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            speed = speed * 2;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            speed = speed / 2;
+        }
+
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
@@ -70,6 +78,25 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(move * speed * Time.deltaTime);
     }
 
+    private void Crouch(CharacterController controller)
+    {
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            controller.height /= 2;
+        }
+        if(Input.GetKeyUp(KeyCode.C))
+        {
+            controller.height *= 2;
+        }
+    }
+
+    private void Slide()
+    {
+
+    }
+
+
+    
    
 
     
