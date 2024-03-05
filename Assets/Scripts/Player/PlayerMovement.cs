@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(velocity);
+        
         if(IsGrounded(velocity))
         {
             velocity.y = -2f;
