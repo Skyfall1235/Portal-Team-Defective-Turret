@@ -6,12 +6,14 @@ public class TurretCOV : MonoBehaviour
 {
     [SerializeField] float maxXRaycastModifier;
     [SerializeField] float maxYRaycastModifier;
+    [SerializeField] float maxZRaycastModifier;
 
     private Vector3 gizmoDirection;
 
     private void Start()
     {
         InvokeRepeating("RaycastForTargets", .1f, .1f);
+        print(Vector3.forward);
     }
 
 
@@ -21,6 +23,7 @@ public class TurretCOV : MonoBehaviour
 
         float raycastXModifier = Random.Range(0, maxXRaycastModifier);
         float raycastYModifier = Random.Range(0, maxYRaycastModifier);
+     
 
         Vector3 direction = new Vector3(transform.forward.x + raycastXModifier, transform.forward.y + raycastYModifier, transform.forward.z);
         gizmoDirection = direction;
@@ -30,11 +33,8 @@ public class TurretCOV : MonoBehaviour
             print(hit.transform.name);
         }
         print("Raycast");
+        Debug.DrawRay(transform.position, direction * 1000, Color.yellow);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(transform.position, gizmoDirection);
-    }
+ 
 }
