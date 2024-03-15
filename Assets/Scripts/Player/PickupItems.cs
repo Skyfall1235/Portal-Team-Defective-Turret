@@ -13,9 +13,9 @@ using UnityEngine.InputSystem;
 
 public class PickupItems : MonoBehaviour
 {
-    private GameObject _currentPickup;
-    private bool _isDetectingAPickup = false;
+    private GameObject _currentPickup; //Current picked up object, will clear once right click is released.
 
+    [SerializeField] private GameObject playerCam;
     [SerializeField] private float maxDistanceToHold;
     [SerializeField] private float maxDistanceToDetectObjects;
     [SerializeField] private LayerMask pickupMask;
@@ -35,7 +35,7 @@ public class PickupItems : MonoBehaviour
         }
         else if (_currentPickup != null)
         {
-            // Release the pickup if the right mouse button is not pressed
+            // Release the pickup if the right mouse button is not pressed or the player left clicks.
             DropItem();
         }
     }
@@ -45,8 +45,8 @@ public class PickupItems : MonoBehaviour
         RaycastHit[] hits = new RaycastHit[1];
 
         if (Physics.RaycastNonAlloc(
-                transform.position,
-                transform.forward,
+                playerCam.transform.position,
+                playerCam.transform.forward,
                 hits,
                 maxDistanceToDetectObjects,
                 pickupMask) > 0)
@@ -57,7 +57,9 @@ public class PickupItems : MonoBehaviour
             Pickup pickupComponent = hitObject.GetComponent<Pickup>();
             if (pickupComponent != null && !pickupComponent.isPickedUp)
             {
+                Debug.Log("Hit pickup-able item.");
                 _currentPickup = hitObject;
+                HoldPickup();
             }
             else
             {
@@ -74,12 +76,18 @@ public class PickupItems : MonoBehaviour
 
     private void HoldPickup()
     {
+        if (_currentPickup == null) return;
+
         Pickup pickup = _currentPickup.GetComponent<Pickup>();
         pickup.isPickedUp = true;
+        
+        //Disable rigidbody gravity temporarily to prevent shaking while picked up.
+        Rigidbody currentPickupRigidbody = pickup.GetComponent<Rigidbody>();
+        currentPickupRigidbody.useGravity = false;
 
-        Vector3 targetPosition = HitPoint(_currentPickup);
+        Vector3 targetPosition = playerCam.transform.position + playerCam.transform.forward * maxDistanceToHold;
         _currentPickup.transform.position = Vector3.Lerp(_currentPickup.transform.position, targetPosition, Time.deltaTime * 10f);
-
+        
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             DropItem();
@@ -91,8 +99,12 @@ public class PickupItems : MonoBehaviour
         Pickup pickup = _currentPickup.GetComponent<Pickup>();
         pickup.isPickedUp = false;
         _currentPickup = null;
+
+        //Reenable rigidbody gravity 
+        Rigidbody currentPickupRigidbody = pickup.GetComponent<Rigidbody>();
+        currentPickupRigidbody.useGravity = true;
     }
 
-    private Vector3 HitPoint(GameObject pickup) => pickup.transform.position;
+    //private Vector3 HitPoint(GameObject pickup) => pickup.transform.position;
 }
 
