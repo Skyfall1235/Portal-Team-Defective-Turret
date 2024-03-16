@@ -18,7 +18,7 @@ public class SphereView : Editor
         Handles.DrawLine(fow.transform.position, fow.transform.position + visionAngleB * fow.visionDistance);
 
         Handles.color = Color.red;
-        foreach (Transform targetInSight in fow.targetsInSight)
+        foreach (Transform targetInSight in fow.SpottedTargets)
         {
             Handles.DrawLine(fow.transform.position, targetInSight.position);
         }

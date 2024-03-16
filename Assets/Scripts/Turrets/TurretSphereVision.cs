@@ -10,8 +10,21 @@ public class TurretSphereVision : MonoBehaviour
 
     public LayerMask shootableLayer;
 
-    public List<Transform> targetsInSight = new List<Transform>();
+    private List<Transform> targetsInSight = new List<Transform>();
 
+    public List<Transform> SpottedTargets
+    {
+        get
+        {
+            return targetsInSight;
+        }
+        set
+        {
+            targetsInSight = value;
+        }
+
+    }
+   
 
     private void Start()
     {
@@ -30,9 +43,9 @@ public class TurretSphereVision : MonoBehaviour
 
     private void GetVisibleTargets(float radius, float angle, LayerMask shootables)
     {
-        targetsInSight.Clear();
+        SpottedTargets.Clear();
         Collider[] targetsInRadius = Physics.OverlapSphere(transform.position, radius, shootables);
-        print(targetsInRadius.Length);
+ 
         for(int i = 0; i < targetsInRadius.Length; i++)
         {
             if(Vector3.Angle(transform.forward, targetsInRadius[i].transform.position) < angle / 2)
@@ -45,8 +58,10 @@ public class TurretSphereVision : MonoBehaviour
                     int shootablesLayerValue = LayerMask.NameToLayer("Player");
                     if(hit.transform.gameObject.layer == shootablesLayerValue)
                     {
-                        targetsInSight.Add(targetsInRadius[i].transform);
+                        SpottedTargets.Add(targetsInRadius[i].transform);
+                       
                     }
+                    
                 }
                 
             }

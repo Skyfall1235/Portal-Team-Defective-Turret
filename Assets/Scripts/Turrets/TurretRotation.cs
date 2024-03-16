@@ -4,29 +4,27 @@ using UnityEngine;
 
 public class TurretRotation : MonoBehaviour
 {
-    bool rotateLeft;
-    [SerializeField] float speed;
+    TurretSphereVision tSV;
+    Quaternion originalRotation;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        rotateLeft = true;
+        tSV = GetComponentInParent<TurretSphereVision>();
+        originalRotation = transform.rotation;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(rotateLeft)
+        if(tSV.SpottedTargets.Count > 0)
         {
-            transform.Rotate(new Vector3(transform.rotation.x, transform.rotation.y + speed, transform.position.z));
-            if(transform.rotation.y <= 0)
-            {
-                rotateLeft = false;
-            }
+            Vector3 direction = (tSV.SpottedTargets[0].position - transform.position).normalized;
+            Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
+
+            transform.rotation = rotation;
         }
         else
         {
-
+            transform.rotation = originalRotation;
         }
     }
 }
