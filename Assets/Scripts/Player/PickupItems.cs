@@ -38,16 +38,14 @@ public class PickupItems : MonoBehaviour
 
     private void DetectPickup()
     {
-        RaycastHit[] hits = new RaycastHit[1];
-
-        if (Physics.RaycastNonAlloc(
+        if (Physics.Raycast(
                 playerCam.transform.position,
                 playerCam.transform.forward,
-                hits,
+                out var hitInfo,
                 maxDistanceToDetectObjects,
-                pickupMask) > 0)
+                pickupMask))
         {
-            GameObject hitObject = hits[0].collider.gameObject;
+            GameObject hitObject = hitInfo.collider.gameObject;
 
             // Check if the object has the Pickup component and is not already picked up
             Pickup pickupComponent = hitObject.GetComponent<Pickup>();
