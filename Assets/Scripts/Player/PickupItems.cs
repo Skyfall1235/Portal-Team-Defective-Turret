@@ -1,7 +1,3 @@
-using System;
-using UnityEngine;
-using UnityEngine.InputSystem;
-
 /* Assignment: Portal
 /  Programmer: Alden Chappell
 /  Class Section: SGD.285.4171
