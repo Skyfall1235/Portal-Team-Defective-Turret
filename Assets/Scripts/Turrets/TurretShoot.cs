@@ -25,8 +25,6 @@ public class TurretShoot : MonoBehaviour
                 StartCoroutine(CreateProjectiles());
                 startedShooting = true;
             }
-            
-            
         }
         else
         {
@@ -49,7 +47,6 @@ public class TurretShoot : MonoBehaviour
                 barrelIndex = 0;
             }
         }
-
     }
 
     private void CreateBullet(int barrel)

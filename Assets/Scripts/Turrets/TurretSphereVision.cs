@@ -12,6 +12,7 @@ public class TurretSphereVision : MonoBehaviour
 
     private List<Transform> targetsInSight = new List<Transform>();
 
+    //Get and set targetsInSight list
     public List<Transform> SpottedTargets
     {
         get
@@ -28,27 +29,17 @@ public class TurretSphereVision : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(CheckForTargets(.2f));
+        InvokeRepeating("GetVisibleTargets", .2f, .2f);
     }
 
-
-    private IEnumerator CheckForTargets(float delay)
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(delay);
-            GetVisibleTargets(visionDistance, visionAngle, shootableLayer);
-        }
-    }
-
-    private void GetVisibleTargets(float radius, float angle, LayerMask shootables)
+    private void GetVisibleTargets()
     {
         SpottedTargets.Clear();
-        Collider[] targetsInRadius = Physics.OverlapSphere(transform.position, radius, shootables);
+        Collider[] targetsInRadius = Physics.OverlapSphere(transform.position, visionDistance, shootableLayer);
  
         for(int i = 0; i < targetsInRadius.Length; i++)
         {
-            if(Vector3.Angle(transform.forward, targetsInRadius[i].transform.position) < angle / 2)
+            if(Vector3.Angle(transform.forward, targetsInRadius[i].transform.position) < visionAngle / 2)
             {
                 float distanceToTarget = Vector3.Distance(transform.position, targetsInRadius[i].transform.position);
                 Vector3 directionToTarget = (targetsInRadius[i].transform.position - transform.position).normalized;
@@ -68,7 +59,7 @@ public class TurretSphereVision : MonoBehaviour
         }
     }
 
-
+    //Used for custom editor script for editor visualization of Viewing distance and Angle.
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
     {
         if (!angleIsGlobal)

@@ -15,6 +15,12 @@ public class BulletScript : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(shootDir * speed);
     }
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+
+        Destroy(gameObject);
+    }
+
+
 
 }
