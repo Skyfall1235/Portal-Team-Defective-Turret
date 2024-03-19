@@ -1,21 +1,18 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
-
 /* Assignment: Portal
 /  Programmer: Alden Chappell
 /  Class Section: SGD.285.4171
 /  Instructor: Locklear
 /  Date: 29/29/2024
 */
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PickupItems : MonoBehaviour
 {
     private GameObject _currentPickup; //Current picked up object, will clear once right click is released.
 
     [SerializeField] private GameObject playerCam;
-    [SerializeField] private float minDistanceToHoldPickup;
-    [SerializeField] private float maxDistanceToHoldPickup;
+    [SerializeField] private float maxDistanceToHold;
     [SerializeField] private float maxDistanceToDetectObjects;
     [SerializeField] private LayerMask pickupMask;
 
@@ -30,7 +27,6 @@ public class PickupItems : MonoBehaviour
             else
             {
                 HoldPickup();
-                MovePickupWithScrollWheel();
             }
         }
         else if (_currentPickup != null)
@@ -45,7 +41,7 @@ public class PickupItems : MonoBehaviour
         if (Physics.Raycast(
                 playerCam.transform.position,
                 playerCam.transform.forward,
-                out RaycastHit hitInfo,
+                out var hitInfo,
                 maxDistanceToDetectObjects,
                 pickupMask))
         {
@@ -83,7 +79,7 @@ public class PickupItems : MonoBehaviour
         Rigidbody currentPickupRigidbody = pickup.GetComponent<Rigidbody>();
         currentPickupRigidbody.useGravity = false;
 
-        Vector3 targetPosition = playerCam.transform.position + playerCam.transform.forward * maxDistanceToHoldPickup;
+        Vector3 targetPosition = playerCam.transform.position + playerCam.transform.forward * maxDistanceToHold;
         _currentPickup.transform.position = Vector3.Lerp(_currentPickup.transform.position, targetPosition, Time.deltaTime * 10f);
         
         if (Mouse.current.leftButton.wasPressedThisFrame)
@@ -103,25 +99,6 @@ public class PickupItems : MonoBehaviour
         currentPickupRigidbody.useGravity = true;
     }
 
-    private Vector2 GetScrollWheelInputDirection() => Mouse.current.scroll.ReadValue();
-
-    private void MovePickupWithScrollWheel()
-    {
-        Vector2 scrollDirection = GetScrollWheelInputDirection();
-        
-        if (scrollDirection.y > 0)
-        {
-            // Move the pickup away from the player up to the maxDistanceToHoldPickup
-            Vector3 targetMaxPosition = playerCam.transform.position + playerCam.transform.forward * maxDistanceToHoldPickup;
-            _currentPickup.transform.position = Vector3.Lerp(_currentPickup.transform.position, targetMaxPosition, Time.deltaTime * 10f);
-        }
-        else if (scrollDirection.y < 0)
-        {
-            // Move the pickup towards the player up to the minDistanceToHoldPickup
-            Vector3 targetMinPosition = playerCam.transform.position + playerCam.transform.forward * minDistanceToHoldPickup;
-            _currentPickup.transform.position = Vector3.Lerp(_currentPickup.transform.position, targetMinPosition, Time.deltaTime * 10f);
-        }
-    }
-
+    //private Vector3 HitPoint(GameObject pickup) => pickup.transform.position;
 }
 
