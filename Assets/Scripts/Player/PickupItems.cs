@@ -1,6 +1,6 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 /* Assignment: Portal
 /  Programmer: Alden Chappell
@@ -8,15 +8,14 @@ using UnityEngine.InputSystem;
 /  Instructor: Locklear
 /  Date: 29/29/2024
 */
-using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PickupItems : MonoBehaviour
 {
     private GameObject _currentPickup; //Current picked up object, will clear once right click is released.
 
     [SerializeField] private GameObject playerCam;
-    [SerializeField] private float maxDistanceToHold;
+    [SerializeField] private float minDistanceToHoldPickup;
+    [SerializeField] private float maxDistanceToHoldPickup;
     [SerializeField] private float maxDistanceToDetectObjects;
     [SerializeField] private LayerMask pickupMask;
 
@@ -31,6 +30,7 @@ public class PickupItems : MonoBehaviour
             else
             {
                 HoldPickup();
+                MovePickupWithScrollWheel();
             }
         }
         else if (_currentPickup != null)
@@ -42,16 +42,14 @@ public class PickupItems : MonoBehaviour
 
     private void DetectPickup()
     {
-        RaycastHit[] hits = new RaycastHit[1];
-
-        if (Physics.RaycastNonAlloc(
+        if (Physics.Raycast(
                 playerCam.transform.position,
                 playerCam.transform.forward,
-                hits,
+                out RaycastHit hitInfo,
                 maxDistanceToDetectObjects,
-                pickupMask) > 0)
+                pickupMask))
         {
-            GameObject hitObject = hits[0].collider.gameObject;
+            GameObject hitObject = hitInfo.collider.gameObject;
 
             // Check if the object has the Pickup component and is not already picked up
             Pickup pickupComponent = hitObject.GetComponent<Pickup>();
@@ -85,7 +83,7 @@ public class PickupItems : MonoBehaviour
         Rigidbody currentPickupRigidbody = pickup.GetComponent<Rigidbody>();
         currentPickupRigidbody.useGravity = false;
 
-        Vector3 targetPosition = playerCam.transform.position + playerCam.transform.forward * maxDistanceToHold;
+        Vector3 targetPosition = playerCam.transform.position + playerCam.transform.forward * maxDistanceToHoldPickup;
         _currentPickup.transform.position = Vector3.Lerp(_currentPickup.transform.position, targetPosition, Time.deltaTime * 10f);
         
         if (Mouse.current.leftButton.wasPressedThisFrame)
@@ -105,6 +103,25 @@ public class PickupItems : MonoBehaviour
         currentPickupRigidbody.useGravity = true;
     }
 
-    //private Vector3 HitPoint(GameObject pickup) => pickup.transform.position;
+    private Vector2 GetScrollWheelInputDirection() => Mouse.current.scroll.ReadValue();
+
+    private void MovePickupWithScrollWheel()
+    {
+        Vector2 scrollDirection = GetScrollWheelInputDirection();
+        
+        if (scrollDirection.y > 0)
+        {
+            // Move the pickup away from the player up to the maxDistanceToHoldPickup
+            Vector3 targetMaxPosition = playerCam.transform.position + playerCam.transform.forward * maxDistanceToHoldPickup;
+            _currentPickup.transform.position = Vector3.Lerp(_currentPickup.transform.position, targetMaxPosition, Time.deltaTime * 10f);
+        }
+        else if (scrollDirection.y < 0)
+        {
+            // Move the pickup towards the player up to the minDistanceToHoldPickup
+            Vector3 targetMinPosition = playerCam.transform.position + playerCam.transform.forward * minDistanceToHoldPickup;
+            _currentPickup.transform.position = Vector3.Lerp(_currentPickup.transform.position, targetMinPosition, Time.deltaTime * 10f);
+        }
+    }
+
 }
 
