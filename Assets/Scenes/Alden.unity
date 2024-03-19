@@ -341,6 +341,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1501529268358821563, guid: df5ef88340c95c34c99d949abf251b8c,
+        type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501529268358821563, guid: df5ef88340c95c34c99d949abf251b8c,
+        type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501529268358821563, guid: df5ef88340c95c34c99d949abf251b8c,
+        type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 7741548021094203536, guid: df5ef88340c95c34c99d949abf251b8c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -395,6 +410,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FPSPlayer 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843172137585018539, guid: df5ef88340c95c34c99d949abf251b8c,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843172137585018539, guid: df5ef88340c95c34c99d949abf251b8c,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1869,7 +1894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCam: {fileID: 549561474516451295}
-  maxDistanceToHold: 15
+  maxDistanceToHold: 0
   maxDistanceToDetectObjects: 20
   pickupMask:
     serializedVersion: 2
