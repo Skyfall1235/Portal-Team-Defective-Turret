@@ -341,6 +341,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3669933088865937394, guid: df5ef88340c95c34c99d949abf251b8c,
+        type: 3}
+      propertyPath: maxDistanceToHoldPickup
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3669933088865937394, guid: df5ef88340c95c34c99d949abf251b8c,
+        type: 3}
+      propertyPath: minDistanceToHoldPickup
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7741548021094203536, guid: df5ef88340c95c34c99d949abf251b8c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1869,7 +1879,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCam: {fileID: 549561474516451295}
-  maxDistanceToHold: 0
+  minDistanceToHoldPickup: 0
+  maxDistanceToHoldPickup: 0
   maxDistanceToDetectObjects: 20
   pickupMask:
     serializedVersion: 2
