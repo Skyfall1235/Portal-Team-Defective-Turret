@@ -22,6 +22,12 @@ public class BulletScript : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    
+    private void OnTriggerEnter(Collider other)
+    {
+
+        Destroy(gameObject);
+    }
+
+
 
 }

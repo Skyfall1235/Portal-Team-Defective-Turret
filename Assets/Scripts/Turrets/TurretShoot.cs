@@ -59,7 +59,6 @@ public class TurretShoot : MonoBehaviour
                 barrelIndex = 0;
             }
         }
-
     }
 
     private void CreateBullet(Transform barrel, GameObject bullet)
