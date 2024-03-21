@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -749,24 +749,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullets:
   - {fileID: 792556777}
-  - {fileID: 677293807}
   - {fileID: 60784530}
   - {fileID: 1844029021}
   - {fileID: 1807584055}
   - {fileID: 402101160}
-  - {fileID: 603565117}
   - {fileID: 234949232}
   - {fileID: 1569993796}
-  - {fileID: 494217702}
   - {fileID: 1040349922}
-  - {fileID: 521767934}
-  - {fileID: 605853608}
   - {fileID: 383164485}
   - {fileID: 2059104312}
   - {fileID: 1439551088}
   - {fileID: 756280693}
   - {fileID: 2087853675}
-  - {fileID: 665918749}
   - {fileID: 1717815482}
   - {fileID: 1079127133}
   - {fileID: 2024044432}
@@ -774,7 +768,6 @@ MonoBehaviour:
   - {fileID: 1481624325}
   - {fileID: 1608311374}
   - {fileID: 2025514619}
-  - {fileID: 642068735}
   - {fileID: 52463253}
   - {fileID: 320248555}
   - {fileID: 452496192}
@@ -783,9 +776,7 @@ MonoBehaviour:
   - {fileID: 1233657328}
   - {fileID: 1024686031}
   - {fileID: 1201600464}
-  - {fileID: 641495625}
   - {fileID: 742066818}
-  - {fileID: 575346574}
   - {fileID: 1532445331}
   - {fileID: 1250427071}
   - {fileID: 902264611}
@@ -813,24 +804,18 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 792556778}
-  - {fileID: 677293808}
   - {fileID: 60784531}
   - {fileID: 1844029022}
   - {fileID: 1807584056}
   - {fileID: 402101161}
-  - {fileID: 603565118}
   - {fileID: 234949233}
   - {fileID: 1569993797}
-  - {fileID: 494217703}
   - {fileID: 1040349923}
-  - {fileID: 521767935}
-  - {fileID: 605853609}
   - {fileID: 383164486}
   - {fileID: 2059104313}
   - {fileID: 1439551089}
   - {fileID: 756280694}
   - {fileID: 2087853676}
-  - {fileID: 665918750}
   - {fileID: 1717815483}
   - {fileID: 1079127134}
   - {fileID: 2024044433}
@@ -838,7 +823,6 @@ Transform:
   - {fileID: 1481624326}
   - {fileID: 1608311375}
   - {fileID: 2025514620}
-  - {fileID: 642068736}
   - {fileID: 52463254}
   - {fileID: 320248556}
   - {fileID: 452496193}
@@ -847,9 +831,7 @@ Transform:
   - {fileID: 1233657329}
   - {fileID: 1024686032}
   - {fileID: 1201600465}
-  - {fileID: 641495626}
   - {fileID: 742066819}
-  - {fileID: 575346575}
   - {fileID: 1532445332}
   - {fileID: 1250427072}
   - {fileID: 902264612}
@@ -1526,37 +1508,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df5ef88340c95c34c99d949abf251b8c, type: 3}
---- !u!1 &699529032
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 699529033}
-  m_Layer: 0
-  m_Name: BulletPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &699529033
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 699529032}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.5475216, y: 6.798962, z: 10.057049}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &729597290
 GameObject:
   m_ObjectHideFlags: 0
@@ -5056,4 +5007,4 @@ SceneRoots:
   - {fileID: 983828636}
   - {fileID: 1906779123}
   - {fileID: 459699971}
-  - {fileID: 699529033}
+  - {fileID: 264698903}
