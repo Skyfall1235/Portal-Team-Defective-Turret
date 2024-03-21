@@ -8,11 +8,15 @@ public class TurretShoot : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform[] barrelPositions;
 
+    GameObject[] pooledBullets;
+
     bool startedShooting;
 
     private void Start()
     {
         tSV = GetComponentInParent<TurretSphereVision>();
+        pooledBullets = GameObject.Find("BulletPool").GetComponent<BulletList>().GetPooledBullets;
+
         InvokeRepeating("CheckForTargets", .2f, .2f);
     }
 
@@ -25,8 +29,6 @@ public class TurretShoot : MonoBehaviour
                 StartCoroutine(CreateProjectiles());
                 startedShooting = true;
             }
-            
-            
         }
         else
         {
@@ -41,7 +43,15 @@ public class TurretShoot : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(.1f);
-            CreateBullet(barrelIndex);
+           
+            for(int i = 0; i < pooledBullets.Length; i++)
+            {
+                if(pooledBullets[i].activeSelf == false)
+                {
+                    CreateBullet(barrelPositions[barrelIndex], pooledBullets[i]);
+                    break;
+                }
+            }
 
             barrelIndex += 1;
             if(barrelIndex > 3)
@@ -52,8 +62,13 @@ public class TurretShoot : MonoBehaviour
 
     }
 
-    private void CreateBullet(int barrel)
+    private void CreateBullet(Transform barrel, GameObject bullet)
     {
-        GameObject bullet = Instantiate(bulletPrefab, barrelPositions[barrel].position, transform.rotation);
+
+        bullet.gameObject.SetActive(true);
+        bullet.transform.position = barrel.position;
+        bullet.transform.rotation = barrel.rotation;
+        bullet.GetComponent<BulletScript>().SetBulletShootDir();
+
     }
 }

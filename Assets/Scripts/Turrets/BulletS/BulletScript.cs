@@ -7,12 +7,19 @@ public class BulletScript : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float spread;
   
-
-    private void Start()
+    public void SetBulletShootDir()
     {
-        Destroy(this.gameObject, 6f);
         Vector3 shootDir = transform.forward + new Vector3(Random.Range(-spread, spread), Random.Range(-spread, spread), Random.Range(-spread, spread));
         GetComponent<Rigidbody>().AddForce(shootDir * speed);
+
+        Invoke("ReturnBulletToPool", 2f);
+    }
+
+    void ReturnBulletToPool()
+    {
+        transform.position = transform.GetComponentInParent<Transform>().position;
+        transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        this.gameObject.SetActive(false);
     }
 
     
