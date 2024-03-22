@@ -102,6 +102,7 @@ public class PickupItems : MonoBehaviour
     {
         if (_currentPickup == null) return;
 
+        //Assign the current pickup as picked up.
         Pickup pickup = _currentPickup.GetComponent<Pickup>();
         pickup.isPickedUp = true;
 
@@ -113,7 +114,12 @@ public class PickupItems : MonoBehaviour
         Vector3 targetPosition = playerCam.transform.position + playerCam.transform.forward * maxDistanceToHoldPickup;
 
         // Check if there's an obstacle between the player and the target position
-        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, maxDistanceToHoldPickup * .75f))
+        if (Physics.Raycast(
+                playerCam.transform.position,
+                playerCam.transform.forward,
+                out RaycastHit hit,
+                maxDistanceToHoldPickup * .75f)) // 3/4 of the max distance to hold so the object doesnt 
+                                                            // move towards the player too early.
         {
             // If there is, set the target position to the hit point of the raycast
             targetPosition = hit.point;
@@ -142,8 +148,11 @@ public class PickupItems : MonoBehaviour
     
     private void DropItem()
     {
+        //Assign the current pickup as not picked up.
         Pickup pickup = _currentPickup.GetComponent<Pickup>();
         pickup.isPickedUp = false;
+        
+        //Empty out the current pickup variable to allow for picking up new pickups.
         _currentPickup = null;
 
         //Reenable rigidbody gravity 
