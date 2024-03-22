@@ -2,7 +2,7 @@
 /  Programmer: Alden Chappell
 /  Class Section: SGD.285.4171
 /  Instructor: Locklear
-/  Date: 29/29/2024
+/  Date: 1/29/2024
 */
 
 using System.Collections;
@@ -20,12 +20,6 @@ public class PickupItems : MonoBehaviour
     [SerializeField] private float maxDistanceToDetectObjects;
     [SerializeField] private LayerMask pickupMask;
     
-    //Keep track of if the player is using the scroll wheel in order to prevent
-    //The object from being forced back to the maxDistanceToHoldPickup location.
-    private bool _isScrolling = false;
-
-    private bool _shouldHoldPickup = true;
-    private const float HoldCooldownTime = 1.5f;
     private void Update()
     {
         if (Mouse.current.rightButton.isPressed)
@@ -46,6 +40,7 @@ public class PickupItems : MonoBehaviour
         }
     }
 
+    
     private void DetectPickup()
     {
         if (Physics.Raycast(
@@ -61,7 +56,6 @@ public class PickupItems : MonoBehaviour
             Pickup pickupComponent = hitObject.GetComponent<Pickup>();
             if (pickupComponent != null && !pickupComponent.isPickedUp)
             {
-                Debug.Log("Hit pickup-able item.");
                 _currentPickup = hitObject;
                 HoldPickup();
             }
@@ -78,39 +72,12 @@ public class PickupItems : MonoBehaviour
         }
     }
 
-    private void HoldPickup()
-    {
-        if (_currentPickup == null) return;
-
-        StartCoroutine(HoldPickupInPlaceCooldown(HoldCooldownTime));
-        
-        Pickup pickup = _currentPickup.GetComponent<Pickup>();
-        pickup.isPickedUp = true;
-    
-        // Disable rigidbody gravity temporarily to prevent shaking while picked up.
-        Rigidbody currentPickupRigidbody = pickup.GetComponent<Rigidbody>();
-        currentPickupRigidbody.useGravity = false;
-    
-        Vector3 targetPosition = playerCam.transform.position + playerCam.transform.forward * maxDistanceToHoldPickup;
-    
-        // Move the pickup only if the player is not scrolling and isn't on hold pickup cooldown.
-        if (!_isScrolling && _shouldHoldPickup)
-        {
-            _currentPickup.transform.position = Vector3.Lerp(_currentPickup.transform.position, targetPosition, Time.deltaTime * 10f);
-        }
-    
-        // Call the method to move the pickup with the scroll wheel
-        MovePickupWithScrollWheel();
-    }
-    
-    
-    /// <summary>
-    /// Mouse scroll wheel movement only for the object. Currently not functional...
-    /// </summary>
     // private void HoldPickup()
     // {
     //     if (_currentPickup == null) return;
     //
+    //     StartCoroutine(HoldPickupInPlaceCooldown(HoldCooldownTime));
+    //     
     //     Pickup pickup = _currentPickup.GetComponent<Pickup>();
     //     pickup.isPickedUp = true;
     //
@@ -118,17 +85,61 @@ public class PickupItems : MonoBehaviour
     //     Rigidbody currentPickupRigidbody = pickup.GetComponent<Rigidbody>();
     //     currentPickupRigidbody.useGravity = false;
     //
+    //     Vector3 targetPosition = playerCam.transform.position + playerCam.transform.forward * maxDistanceToHoldPickup;
+    //
+    //     // Move the pickup only if the player is not scrolling and isn't on hold pickup cooldown.
+    //     if (!_isScrolling && _shouldHoldPickup)
+    //     {
+    //         _currentPickup.transform.position = Vector3.Lerp(_currentPickup.transform.position, targetPosition, Time.deltaTime * 10f);
+    //     }
+    //
     //     // Call the method to move the pickup with the scroll wheel
     //     MovePickupWithScrollWheel();
-    //
-    //     if (Mouse.current.leftButton.wasPressedThisFrame && _currentPickup != null)
-    //     {
-    //         DropItem();
-    //     }
     // }
+    
+    
+    private void HoldPickup()
+    {
+        if (_currentPickup == null) return;
+
+        Pickup pickup = _currentPickup.GetComponent<Pickup>();
+        pickup.isPickedUp = true;
+
+        // Disable rigidbody gravity temporarily to prevent shaking while picked up.
+        Rigidbody currentPickupRigidbody = pickup.GetComponent<Rigidbody>();
+        currentPickupRigidbody.useGravity = false;
+
+        // Calculate the target position
+        Vector3 targetPosition = playerCam.transform.position + playerCam.transform.forward * maxDistanceToHoldPickup;
+
+        // Check if there's an obstacle between the player and the target position
+        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, maxDistanceToHoldPickup * .75f))
+        {
+            // If there is, set the target position to the hit point of the raycast
+            targetPosition = hit.point;
+        }
+
+        // Calculate the distance from the player to the target position
+        float distanceToPlayer = Vector3.Distance(playerCam.transform.position, targetPosition);
+
+        // Clamp the distance to be no less than minDistanceToHoldPickup
+        if (distanceToPlayer < minDistanceToHoldPickup)
+        {
+            targetPosition = playerCam.transform.position + playerCam.transform.forward * minDistanceToHoldPickup;
+        }
+
+        // Move the pickup to the target position
+        _currentPickup.transform.position = Vector3.Lerp(_currentPickup.transform.position, targetPosition, Time.deltaTime * 10f);
+
+        if (Mouse.current.leftButton.wasPressedThisFrame && _currentPickup != null)
+        {
+            DropItem();
+        }
+    }
 
 
 
+    
     private void DropItem()
     {
         Pickup pickup = _currentPickup.GetComponent<Pickup>();
@@ -139,53 +150,5 @@ public class PickupItems : MonoBehaviour
         Rigidbody currentPickupRigidbody = pickup.GetComponent<Rigidbody>();
         currentPickupRigidbody.useGravity = true;
     }
-
-    //Get the input direction of the scroll wheel (up or down)
-    private Vector2 GetScrollWheelInputDirection() => Mouse.current.scroll.ReadValue();
-
-    
-    // //Check if the player is scrolling or not.
-    // private bool Scrolling() =>
-    //     Mouse.current.scroll.ReadValue().magnitude > 0 || Mouse.current.scroll.ReadValue().magnitude < 0; 
-    
-    private void MovePickupWithScrollWheel()
-    {
-        Vector2 scrollDirection = GetScrollWheelInputDirection();
-    
-        if (scrollDirection.y != 0)
-        {
-            // Update the scrolling flag and start the hold cooldown
-            _isScrolling = true;
-            StartCoroutine(HoldPickupInPlaceCooldown(HoldCooldownTime));
-            
-            // Move the pickup according to the scroll direction
-            if (scrollDirection.y > 0)
-            {
-                // Move the pickup away from the player up to the maxDistanceToHoldPickup
-                Vector3 targetMaxPosition = playerCam.transform.position + playerCam.transform.forward * maxDistanceToHoldPickup;
-                _currentPickup.transform.position = Vector3.Lerp(_currentPickup.transform.position, targetMaxPosition, Time.deltaTime * 10f);
-            }
-            else if (scrollDirection.y < 0)
-            {
-                // Move the pickup towards the player up to the minDistanceToHoldPickup
-                Vector3 targetMinPosition = playerCam.transform.position + playerCam.transform.forward * minDistanceToHoldPickup;
-                _currentPickup.transform.position = Vector3.Lerp(_currentPickup.transform.position, targetMinPosition, Time.deltaTime * 10f);
-            }
-        }
-        else
-        {
-            // Reset the scrolling flag
-            _isScrolling = false;
-        }
-    }
-
-    private IEnumerator HoldPickupInPlaceCooldown(float cooldown)
-    {
-        yield return new WaitForSeconds(cooldown);
-        _shouldHoldPickup = false;
-        //_shouldHoldPickup = true;
-    }
-    
-    //private Vector3 HitPoint(GameObject pickup) => pickup.transform.position;
 }
 
