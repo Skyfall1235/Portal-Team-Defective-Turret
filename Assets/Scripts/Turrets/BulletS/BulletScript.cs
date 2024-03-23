@@ -24,7 +24,13 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other.gameObject.tag == "Player")
+        {
+            other.GetComponent<PlayerStats>().CancelInvoke();
+            other.GetComponent<PlayerStats>().Invoke("DecreaseHealth", .2f);
+           
 
+        }
         ReturnBulletToPool();
     }
 

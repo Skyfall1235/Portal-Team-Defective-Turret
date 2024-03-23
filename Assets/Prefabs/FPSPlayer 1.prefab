@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 7741548021094203537}
   - component: {fileID: 7741548021094203543}
   - component: {fileID: 3669933088865937394}
+  - component: {fileID: 3186438439128013532}
   m_Layer: 0
   m_Name: FPSPlayer 1
   m_TagString: Untagged
@@ -256,11 +257,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCam: {fileID: 7741548022627507738}
-  maxDistanceToHold: 15
+  minDistanceToHoldPickup: 0
+  maxDistanceToHoldPickup: 0
   maxDistanceToDetectObjects: 20
   pickupMask:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &3186438439128013532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7741548021094203538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802998c44093c104b8766a13dccf022b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7741548021349454057
 GameObject:
   m_ObjectHideFlags: 0
