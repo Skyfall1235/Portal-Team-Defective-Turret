@@ -12,7 +12,15 @@ public class PlayerStats : MonoBehaviour
     {
         playerHealth -= 15;
         healthText.text = playerHealth.ToString() + "%";
-        InvokeRepeating("IncreaseHealth", 3f, .01f);
+        if(playerHealth <= 0)
+        {
+            GetComponentInChildren<PlayerUIManager>().deathScreen.SetActive(true);
+        }
+        else
+        {
+            InvokeRepeating("IncreaseHealth", 3f, .01f);
+        }
+        
     }
 
     private void IncreaseHealth()
