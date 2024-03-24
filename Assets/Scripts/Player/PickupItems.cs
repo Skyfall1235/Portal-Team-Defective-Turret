@@ -5,7 +5,6 @@
 /  Date: 1/29/2024
 */
 
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,10 +14,10 @@ public class PickupItems : MonoBehaviour
 
     [SerializeField] private GameObject playerCam;
     
-    [SerializeField] private float minDistanceToHoldPickup;
-    [SerializeField] private float maxDistanceToHoldPickup;
-    [SerializeField] private float maxDistanceToDetectObjects;
-    [SerializeField] private LayerMask pickupMask;
+    private const float MinDistanceToHoldPickup = 2.0f; //Closest distance pickups will be held at.
+    private const float MaxDistanceToHoldPickup = 8.0f; //Furthest distance pickups will be held at.
+    private const float MaxDistanceToDetectObjects = 17.5f; //Furthest distance the player can pick up an object from.
+    [SerializeField] private LayerMask pickupMask; //Items should be on the pickup layer mask for the raycast to function.
     
     private void Update()
     {
@@ -47,7 +46,7 @@ public class PickupItems : MonoBehaviour
                 playerCam.transform.position,
                 playerCam.transform.forward,
                 out var hitInfo,
-                maxDistanceToDetectObjects,
+                MaxDistanceToDetectObjects,
                 pickupMask))
         {
             GameObject hitObject = hitInfo.collider.gameObject;
@@ -111,14 +110,14 @@ public class PickupItems : MonoBehaviour
         currentPickupRigidbody.useGravity = false;
 
         // Calculate the target position
-        Vector3 targetPosition = playerCam.transform.position + playerCam.transform.forward * maxDistanceToHoldPickup;
+        Vector3 targetPosition = playerCam.transform.position + playerCam.transform.forward * MaxDistanceToHoldPickup;
 
         // Check if there's an obstacle between the player and the target position
         if (Physics.Raycast(
                 playerCam.transform.position,
                 playerCam.transform.forward,
                 out RaycastHit hit,
-                maxDistanceToHoldPickup * .75f)) // 3/4 of the max distance to hold so the object doesnt 
+                MaxDistanceToHoldPickup * .75f)) // 3/4 of the max distance to hold so the object doesnt 
                                                             // move towards the player too early.
         {
             // If there is, set the target position to the hit point of the raycast
@@ -128,22 +127,24 @@ public class PickupItems : MonoBehaviour
         // Calculate the distance from the player to the target position
         float distanceToPlayer = Vector3.Distance(playerCam.transform.position, targetPosition);
 
-        // Clamp the distance to be no less than minDistanceToHoldPickup
-        if (distanceToPlayer < minDistanceToHoldPickup)
+        // Clamp the distance to be no less than MinDistanceToHoldPickup
+        if (distanceToPlayer < MinDistanceToHoldPickup)
         {
-            targetPosition = playerCam.transform.position + playerCam.transform.forward * minDistanceToHoldPickup;
+            targetPosition = playerCam.transform.position + playerCam.transform.forward * MinDistanceToHoldPickup;
         }
 
         // Move the pickup to the target position
-        _currentPickup.transform.position = Vector3.Lerp(_currentPickup.transform.position, targetPosition, Time.deltaTime * 10f);
+        _currentPickup.transform.position = 
+            Vector3.Lerp(
+                _currentPickup.transform.position,
+                targetPosition,
+                Time.deltaTime * 10f);
 
         if (Mouse.current.leftButton.wasPressedThisFrame && _currentPickup != null)
         {
             DropItem();
         }
     }
-
-
 
     
     private void DropItem()
