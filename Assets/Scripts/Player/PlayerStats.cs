@@ -15,6 +15,7 @@ public class PlayerStats : MonoBehaviour
         if(playerHealth <= 0)
         {
             GetComponentInChildren<PlayerUIManager>().deathScreen.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
         }
         else
         {

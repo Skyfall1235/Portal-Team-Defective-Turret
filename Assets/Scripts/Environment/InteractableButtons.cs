@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InteractableButtons : MonoBehaviour
 {
     [SerializeField] GameObject door;
+    public UnityEvent<bool> OnCollision = new UnityEvent<bool>();
 
 
     private void OnCollisionEnter(Collision collision)
@@ -12,7 +14,7 @@ public class InteractableButtons : MonoBehaviour
         
         if (collision.gameObject.layer == 6)
         {
-            door.SetActive(false);
+            OnCollision.Invoke(false);
         }
     }
     private void OnCollisionExit(Collision collision)
@@ -20,7 +22,7 @@ public class InteractableButtons : MonoBehaviour
  
         if (collision.gameObject.layer == 6)
         {
-            door.SetActive(true);
+            OnCollision.Invoke(true);
         }
     }
 }
