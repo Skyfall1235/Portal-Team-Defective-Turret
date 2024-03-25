@@ -21,8 +21,7 @@ public class Pickup : MonoBehaviour
 
         if (isPickedUp)
         {
-            PickupItems pickupItems = other.gameObject.GetComponent<PickupItems>();
-            pickupItems.DropPickup();
+            
                 
             MovePickupAbovePlayer(other.gameObject);
         }
@@ -31,11 +30,15 @@ public class Pickup : MonoBehaviour
     //Move the pickup above 
     private void MovePickupAbovePlayer(GameObject player)
     {
+        //Force the player to drop this pickup
+        PickupItems pickupItems = player.GetComponent<PickupItems>();
+        pickupItems.DropPickup();
+        
         var playerPosition = player.transform.position;
         
         transform.position = new Vector3(
             playerPosition.x - XMovementOffset,
             playerPosition.x,
-            playerPosition.z);
+            playerPosition.x);
     }
 }
