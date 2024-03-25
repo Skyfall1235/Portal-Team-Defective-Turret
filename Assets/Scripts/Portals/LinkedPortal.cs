@@ -26,7 +26,9 @@ public class LinkedPortal : MonoBehaviour
     public void Teleport(GameObject GO)
     {
         //set the objects position to that of the spawn transform
+        Debug.Log($"Teleporting to {gameObject.name}");
         GO.transform.position = m_spawnTransform.position;
+        GO.transform.localRotation = m_spawnTransform.localRotation;
         PushNonPlayerObjects(GO);
         onTeleportIsTarget.Invoke();
     }
@@ -53,15 +55,15 @@ public class LinkedPortal : MonoBehaviour
         return forwardVector;
     }
     
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         //check if the object in in the target laymermasks, if it is, go ahead and call the unity event
-        int pickupLayer = m_pickupLayerMask.value;
-        int playerLayer = m_playerLayerMask.value;
-        if(collision.gameObject.layer != pickupLayer || collision.gameObject.layer != playerLayer)
+        LayerMask pickupLayerMask = m_pickupLayerMask;
+        LayerMask playerLayerMask = m_playerLayerMask;
+        if (!((1 << other.gameObject.layer & pickupLayerMask) != 0 || (1 << other.gameObject.layer & playerLayerMask) != 0))
         {
             return;
         }
-        m_onCollisionWithPortal.Invoke(collision.gameObject, this);//as in this linked portal
+        m_onCollisionWithPortal.Invoke(other.gameObject, this);//as in this linked portal
     }
 }

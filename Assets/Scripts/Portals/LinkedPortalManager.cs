@@ -20,16 +20,18 @@ public class LinkedPortalManager : MonoBehaviour
     {
         //get current item location in list, then select the next
         int portalIndex = mLinkedPortalList.IndexOf(portal);
-        if (portalIndex + 1 > mLinkedPortalList.Count)
+        Debug.Log(portalIndex);
+        //3
+        if (portalIndex == mLinkedPortalList.Count - 1)
         {
             portalIndex = 0;
         }
-        else 
+        else
         {
             portalIndex++;
         }
         //call teleport on that portal
-        Debug.Log(portalIndex);
+        Debug.Log("portal index " + portalIndex);
         mLinkedPortalList[portalIndex].Teleport(GO);
     }
 
