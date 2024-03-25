@@ -1,5 +1,4 @@
-using System;
-using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 using UnityEngine;
 /* Assignment: Portal
 /  Programmer: Alden Chappell
@@ -12,23 +11,31 @@ using UnityEngine;
 public class Pickup : MonoBehaviour
 {
     public bool isPickedUp = false;
-    [SerializeField] private float floatSpeed = 2.0f;
-    [SerializeField] private float floatHeight = 0.5f;
 
-    private void Update()
+    //How far this pickup should move when colliding with the player
+    private const float XMovementOffset = .05f;
+    
+    private void OnCollisionEnter(Collision other)
     {
+        if (!other.gameObject.CompareTag("Player")) return;
+
         if (isPickedUp)
         {
-            //Hover();
+            PickupItems pickupItems = other.gameObject.GetComponent<PickupItems>();
+            pickupItems.DropPickup();
+                
+            MovePickupAbovePlayer(other.gameObject);
         }
     }
 
-    private void Hover()
+    //Move the pickup above 
+    private void MovePickupAbovePlayer(GameObject player)
     {
-        // Calculate the vertical offset using Mathf.Sin for a smooth floating motion
-        float yOffset = Mathf.Sin(Time.time * floatSpeed) * floatHeight;
-
-        // Apply the offset to the object's position
-        transform.position = new Vector3(transform.position.x, yOffset, transform.position.z);
+        var playerPosition = player.transform.position;
+        
+        transform.position = new Vector3(
+            playerPosition.x - XMovementOffset,
+            playerPosition.x,
+            playerPosition.z);
     }
 }
