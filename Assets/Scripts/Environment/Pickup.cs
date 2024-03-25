@@ -1,10 +1,9 @@
-using UnityEditor.PackageManager;
 using UnityEngine;
 /* Assignment: Portal
 /  Programmer: Alden Chappell
 /  Class Section: SGD.285.4171
 /  Instructor: Locklear
-/  Date: 29/29/2024
+/  Date: 01/29/2024
 */
 
 [RequireComponent(typeof(Rigidbody))]
@@ -21,8 +20,15 @@ public class Pickup : MonoBehaviour
 
         if (isPickedUp)
         {
-            
-                
+            MovePickupAbovePlayer(other.gameObject);
+        }
+
+        
+        
+        Vector3 originalPlayerPosition = other.gameObject.transform.position;
+        float playerAfterRaising = other.gameObject.transform.position.y;
+        if (!isPickedUp && playerAfterRaising > originalPlayerPosition.y)
+        {
             MovePickupAbovePlayer(other.gameObject);
         }
     }
@@ -34,6 +40,7 @@ public class Pickup : MonoBehaviour
         PickupItems pickupItems = player.GetComponent<PickupItems>();
         pickupItems.DropPickup();
         
+        //Move the pickup 
         var playerPosition = player.transform.position;
         
         transform.position = new Vector3(

@@ -1,8 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/* Assignment: Portal
+/  Programmer: Alden Chappell
+/  Class Section: SGD.285.4171
+/  Instructor: Locklear
+/  Date: 03/25/2024
+*/
 public class MainMenuButtonController : MonoBehaviour
 {
     [SerializeField] private GameObject buttonPanel;
@@ -25,7 +29,7 @@ public class MainMenuButtonController : MonoBehaviour
     /// <param name="instructionsLoaded"></param>
     public void LoadInstructions(bool instructionsLoaded)
     {
-        buttonPanel.SetActive(!instructionsLoaded);
-        instructionsPanel.SetActive(instructionsLoaded);
+        buttonPanel.SetActive(!instructionsLoaded); //disable main button panel
+        instructionsPanel.SetActive(instructionsLoaded); //enable instructions panel
     }
 }
