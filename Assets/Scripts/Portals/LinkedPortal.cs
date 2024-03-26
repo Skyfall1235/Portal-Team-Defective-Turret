@@ -12,10 +12,12 @@ public class LinkedPortal : MonoBehaviour
 {
     [SerializeField] private LayerMask m_playerLayerMask;
     [SerializeField] private LayerMask m_pickupLayerMask;
-    [SerializeField] private Transform m_spawnTransform;
+    public Transform m_spawnTransform;
     [SerializeField] private float m_forwardTeleportForce = 0f;
 
-    public UnityEvent<GameObject, LinkedPortal> m_onCollisionWithPortal = new UnityEvent<GameObject, LinkedPortal>();
+    [SerializeField] private LinkedPortal otherPortal;
+
+    public UnityEvent<GameObject> m_onCollisionWithPortal = new UnityEvent<GameObject>();
     public UnityEvent onTeleportIsTarget = new();
 
     /// <summary>
@@ -26,11 +28,11 @@ public class LinkedPortal : MonoBehaviour
     public void Teleport(GameObject GO)
     {
         //set the objects position to that of the spawn transform
-        Debug.Log($"Teleporting to {gameObject.name}");
-        GO.transform.position = m_spawnTransform.position;
-        GO.transform.localRotation = m_spawnTransform.localRotation;
-        PushNonPlayerObjects(GO);
-        onTeleportIsTarget.Invoke();
+        //Debug.Log($"Teleporting to {gameObject.name}");
+        GO.transform.position = otherPortal.m_spawnTransform.position;
+        GO.transform.localRotation = otherPortal.m_spawnTransform.localRotation;
+        //PushNonPlayerObjects(GO);
+        //onTeleportIsTarget.Invoke();
     }
 
     private void PushNonPlayerObjects(GameObject GO)
@@ -64,6 +66,7 @@ public class LinkedPortal : MonoBehaviour
         {
             return;
         }
-        m_onCollisionWithPortal.Invoke(other.gameObject, this);//as in this linked portal
+        Teleport(other.gameObject);
+        //m_onCollisionWithPortal.Invoke(other.gameObject);//as in this linked portal
     }
 }
