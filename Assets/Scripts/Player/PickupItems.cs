@@ -35,7 +35,7 @@ public class PickupItems : MonoBehaviour
         else if (_currentPickup != null)
         {
             // Release the pickup if the right mouse button is not pressed or the player left clicks.
-            DropItem();
+            DropPickup();
         }
     }
 
@@ -70,84 +70,60 @@ public class PickupItems : MonoBehaviour
             _currentPickup = null;
         }
     }
-
-    // private void HoldPickup()
-    // {
-    //     if (_currentPickup == null) return;
-    //
-    //     StartCoroutine(HoldPickupInPlaceCooldown(HoldCooldownTime));
-    //     
-    //     Pickup pickup = _currentPickup.GetComponent<Pickup>();
-    //     pickup.isPickedUp = true;
-    //
-    //     // Disable rigidbody gravity temporarily to prevent shaking while picked up.
-    //     Rigidbody currentPickupRigidbody = pickup.GetComponent<Rigidbody>();
-    //     currentPickupRigidbody.useGravity = false;
-    //
-    //     Vector3 targetPosition = playerCam.transform.position + playerCam.transform.forward * maxDistanceToHoldPickup;
-    //
-    //     // Move the pickup only if the player is not scrolling and isn't on hold pickup cooldown.
-    //     if (!_isScrolling && _shouldHoldPickup)
-    //     {
-    //         _currentPickup.transform.position = Vector3.Lerp(_currentPickup.transform.position, targetPosition, Time.deltaTime * 10f);
-    //     }
-    //
-    //     // Call the method to move the pickup with the scroll wheel
-    //     MovePickupWithScrollWheel();
-    // }
-    
     
     private void HoldPickup()
     {
         if (_currentPickup == null) return;
-
+    
         //Assign the current pickup as picked up.
         Pickup pickup = _currentPickup.GetComponent<Pickup>();
         pickup.isPickedUp = true;
-
+    
         // Disable rigidbody gravity temporarily to prevent shaking while picked up.
         Rigidbody currentPickupRigidbody = pickup.GetComponent<Rigidbody>();
         currentPickupRigidbody.useGravity = false;
-
+    
         // Calculate the target position
         Vector3 targetPosition = playerCam.transform.position + playerCam.transform.forward * MaxDistanceToHoldPickup;
-
+        
         // Check if there's an obstacle between the player and the target position
         if (Physics.Raycast(
                 playerCam.transform.position,
                 playerCam.transform.forward,
-                out RaycastHit hit,
+                out RaycastHit hitInfo,
                 MaxDistanceToHoldPickup * .75f)) // 3/4 of the max distance to hold so the object doesnt 
-                                                            // move towards the player too early.
-        {
+        {                                                   // move towards the player too early.
             // If there is, set the target position to the hit point of the raycast
-            targetPosition = hit.point;
+            targetPosition = hitInfo.point;
         }
-
+    
         // Calculate the distance from the player to the target position
         float distanceToPlayer = Vector3.Distance(playerCam.transform.position, targetPosition);
-
+    
         // Clamp the distance to be no less than MinDistanceToHoldPickup
         if (distanceToPlayer < MinDistanceToHoldPickup)
         {
             targetPosition = playerCam.transform.position + playerCam.transform.forward * MinDistanceToHoldPickup;
         }
-
+    
         // Move the pickup to the target position
         _currentPickup.transform.position = 
             Vector3.Lerp(
                 _currentPickup.transform.position,
                 targetPosition,
                 Time.deltaTime * 10f);
-
+    
         if (Mouse.current.leftButton.wasPressedThisFrame && _currentPickup != null)
         {
-            DropItem();
+            DropPickup();
         }
     }
-
     
-    private void DropItem()
+
+    /// <summary>
+    /// Calling this method will drop the current pickup to the ground wherever it is dropped from.
+    /// </summary>
+    public void DropPickup()
     {
         //Assign the current pickup as not picked up.
         Pickup pickup = _currentPickup.GetComponent<Pickup>();

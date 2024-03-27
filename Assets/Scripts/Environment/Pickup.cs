@@ -1,34 +1,51 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 /* Assignment: Portal
 /  Programmer: Alden Chappell
 /  Class Section: SGD.285.4171
 /  Instructor: Locklear
-/  Date: 29/29/2024
+/  Date: 01/29/2024
 */
 
 [RequireComponent(typeof(Rigidbody))]
 public class Pickup : MonoBehaviour
 {
     public bool isPickedUp = false;
-    [SerializeField] private float floatSpeed = 2.0f;
-    [SerializeField] private float floatHeight = 0.5f;
 
-    private void Update()
+    //How far this pickup should move when colliding with the player
+    private const float XMovementOffset = .05f;
+    
+    private void OnCollisionEnter(Collision other)
     {
+        if (!other.gameObject.CompareTag("Player")) return;
+
         if (isPickedUp)
         {
-            //Hover();
+            MovePickupAbovePlayer(other.gameObject);
+        }
+
+        
+        
+        Vector3 originalPlayerPosition = other.gameObject.transform.position;
+        float playerAfterRaising = other.gameObject.transform.position.y;
+        if (!isPickedUp && playerAfterRaising > originalPlayerPosition.y)
+        {
+            MovePickupAbovePlayer(other.gameObject);
         }
     }
 
-    private void Hover()
+    //Move the pickup above 
+    private void MovePickupAbovePlayer(GameObject player)
     {
-        // Calculate the vertical offset using Mathf.Sin for a smooth floating motion
-        float yOffset = Mathf.Sin(Time.time * floatSpeed) * floatHeight;
-
-        // Apply the offset to the object's position
-        transform.position = new Vector3(transform.position.x, yOffset, transform.position.z);
+        //Force the player to drop this pickup
+        PickupItems pickupItems = player.GetComponent<PickupItems>();
+        pickupItems.DropPickup();
+        
+        //Move the pickup 
+        var playerPosition = player.transform.position;
+        
+        transform.position = new Vector3(
+            playerPosition.x - XMovementOffset,
+            playerPosition.x,
+            playerPosition.x);
     }
 }
