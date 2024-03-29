@@ -2,7 +2,7 @@
 /  Programmer: Alden Chappell
 /  Class Section: SGD.285.4171
 /  Instructor: Locklear
-/  Date: 1/29/2024
+/  Date: 02/29/2024
 */
 
 using UnityEngine;
@@ -125,16 +125,29 @@ public class PickupItems : MonoBehaviour
     /// </summary>
     public void DropPickup()
     {
-        //Assign the current pickup as not picked up.
-        Pickup pickup = _currentPickup.GetComponent<Pickup>();
-        pickup.isPickedUp = false;
+        if(_currentPickup != null)
+        {
+            // Check if the distance from the player to the pickup is greater than or equal to 10.0f
+            float distanceFromPlayer = Vector3.Distance(transform.position, playerCam.transform.position);
+            if (distanceFromPlayer >= 10.0f)
+            {
+                // Move the pickup above the player's head
+                _currentPickup.GetComponent<Pickup>().RespawnPickupNearPlayer(gameObject);
+            }
         
-        //Empty out the current pickup variable to allow for picking up new pickups.
-        _currentPickup = null;
+            // Assign the current pickup as not picked up
+            Pickup pickup = _currentPickup.GetComponent<Pickup>();
+            pickup.isPickedUp = false;
+        
+            // Empty out the current pickup variable to allow for picking up new pickups
+            _currentPickup = null;
 
-        //Reenable rigidbody gravity 
-        Rigidbody currentPickupRigidbody = pickup.GetComponent<Rigidbody>();
-        currentPickupRigidbody.useGravity = true;
+            // Reenable rigidbody gravity 
+            Rigidbody currentPickupRigidbody = pickup.GetComponent<Rigidbody>();
+            currentPickupRigidbody.useGravity = true;
+        }
     }
+
+
 }
 
