@@ -27,24 +27,30 @@ public class TestingPortals : MonoBehaviour
         // Start teleportation effect
         float elapsedTime = 0f;
         Vector3 initialPosition = player.position;
-        Vector3 targetPosition = connectedPortal.spawnLocation.position;
+        Transform targetPosition = connectedPortal.spawnLocation;
 
         while (elapsedTime < TeleportTime)
         {
             float t = elapsedTime / TeleportTime;
-            player.position = Vector3.Lerp(initialPosition, targetPosition, t);
+            //Lerp the players position to the target position
+            player.position = Vector3.Lerp(initialPosition, targetPosition.position, t);
+            //Lerp the players rotation to the target's rotation
+            player.localRotation = Quaternion.Slerp(player.localRotation, targetPosition.localRotation, t);
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         // Move player to the spawn location of the connected portal
-        player.position = targetPosition;
+        player.position = targetPosition.position;
+        // Change the rotation of the player to the targetPosition's rotation
+        player.rotation = targetPosition.rotation;
 
         // Start cooldown
         _isOnCooldown = true;
         _cooldownCoroutine = StartCoroutine(StartTeleportCooldown());
 
+        // Reset teleporting flag
         _isTeleporting = false;
     }
 

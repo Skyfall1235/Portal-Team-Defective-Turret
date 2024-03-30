@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8308714389743513147}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2893239970451978860}
+        m_TargetAssemblyTypeName: PlayerUIManager, Assembly-CSharp
+        m_MethodName: OnRestartButtonPress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5631144962884833291
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +306,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: 1.6126099}
+  m_AnchoredPosition: {x: 0, y: 1.6125488}
   m_SizeDelta: {x: 25.8029, y: 35.4788}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8871927497390993547
@@ -519,9 +531,9 @@ GameObject:
   - component: {fileID: 7741548021094203543}
   - component: {fileID: 3669933088865937394}
   - component: {fileID: 3186438439128013532}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FPSPlayer 1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -622,7 +634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: 0
   healthText: {fileID: 8024343090201179863}
-  invincible: 1
+  invincible: 0
 --- !u!1 &7741548021349454057
 GameObject:
   m_ObjectHideFlags: 0
