@@ -1015,11 +1015,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3186438439128013532, guid: df5ef88340c95c34c99d949abf251b8c,
-        type: 3}
-      propertyPath: invincible
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7590874394174250105, guid: df5ef88340c95c34c99d949abf251b8c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1098,11 +1093,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7741548021094203538, guid: df5ef88340c95c34c99d949abf251b8c,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 384104102}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df5ef88340c95c34c99d949abf251b8c, type: 3}
 --- !u!4 &118656703 stripped
 Transform:
@@ -1331,7 +1322,7 @@ GameObject:
   - component: {fileID: 130642936}
   - component: {fileID: 130642935}
   - component: {fileID: 130642934}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TurretPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2337,7 +2328,7 @@ GameObject:
   - component: {fileID: 349055585}
   - component: {fileID: 349055584}
   - component: {fileID: 349055583}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2610,43 +2601,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381671333}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &384104096 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7741548021094203538, guid: df5ef88340c95c34c99d949abf251b8c,
-    type: 3}
-  m_PrefabInstance: {fileID: 100036632}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &384104102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 384104096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e,
-    type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 1858571880}
 --- !u!1001 &414323303
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5682,7 +5636,7 @@ GameObject:
   - component: {fileID: 1231674202}
   - component: {fileID: 1231674201}
   - component: {fileID: 1231674200}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TurretPlatform (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7821,12 +7775,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1461307039}
   m_PrefabAsset: {fileID: 0}
---- !u!20 &1858571880 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7741548022627507736, guid: df5ef88340c95c34c99d949abf251b8c,
-    type: 3}
-  m_PrefabInstance: {fileID: 100036632}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1868565123
 GameObject:
   m_ObjectHideFlags: 0
@@ -8906,7 +8854,7 @@ GameObject:
   - component: {fileID: 2034662357}
   - component: {fileID: 2034662356}
   - component: {fileID: 2034662355}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TurretPlatform (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9295,7 +9243,7 @@ GameObject:
   - component: {fileID: 2064981593}
   - component: {fileID: 2064981592}
   - component: {fileID: 2064981591}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9511,7 +9459,7 @@ GameObject:
   - component: {fileID: 2111301869}
   - component: {fileID: 2111301868}
   - component: {fileID: 2111301867}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
