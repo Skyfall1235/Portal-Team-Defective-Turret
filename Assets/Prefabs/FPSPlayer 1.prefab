@@ -605,9 +605,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCam: {fileID: 7741548022627507738}
-  minDistanceToHoldPickup: 2
-  maxDistanceToHoldPickup: 8
-  maxDistanceToDetectObjects: 20
   pickupMask:
     serializedVersion: 2
     m_Bits: 64
@@ -625,6 +622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: 0
   healthText: {fileID: 8024343090201179863}
+  invincible: 0
 --- !u!1 &7741548021349454057
 GameObject:
   m_ObjectHideFlags: 0
@@ -910,6 +908,7 @@ GameObject:
   - component: {fileID: 1382629655573300051}
   - component: {fileID: 1501529268358821563}
   - component: {fileID: 1688958410250301343}
+  - component: {fileID: 2893239970451978860}
   m_Layer: 0
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -1002,6 +1001,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2893239970451978860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8815499805383775907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8182f5bb639a94e4f82dd523d0508334, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathScreen: {fileID: 6446545544210213228}
 --- !u!1 &9139563720474501502
 GameObject:
   m_ObjectHideFlags: 0

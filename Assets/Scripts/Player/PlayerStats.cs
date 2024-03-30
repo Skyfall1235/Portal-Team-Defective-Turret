@@ -8,20 +8,24 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float playerHealth;
     [SerializeField] TMP_Text healthText;
 
+    [SerializeField] private bool invincible;
+    
     public void DecreaseHealth()
     {
-        playerHealth -= 15;
-        healthText.text = playerHealth.ToString() + "%";
-        if(playerHealth <= 0)
+        if (!invincible)
         {
-            GetComponentInChildren<PlayerUIManager>().deathScreen.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
+            playerHealth -= 15;
+            healthText.text = playerHealth.ToString() + "%";
+            if(playerHealth <= 0)
+            {
+                GetComponentInChildren<PlayerUIManager>().deathScreen.SetActive(true);
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                InvokeRepeating("IncreaseHealth", 3f, .01f);
+            }
         }
-        else
-        {
-            InvokeRepeating("IncreaseHealth", 3f, .01f);
-        }
-        
     }
 
     private void IncreaseHealth()
