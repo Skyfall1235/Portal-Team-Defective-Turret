@@ -622,7 +622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealth: 0
   healthText: {fileID: 8024343090201179863}
-  invincible: 0
+  invincible: 1
 --- !u!1 &7741548021349454057
 GameObject:
   m_ObjectHideFlags: 0
