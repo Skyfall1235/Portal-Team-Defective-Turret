@@ -1,12 +1,11 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class TestingPortals : MonoBehaviour
 {
     public Transform spawnLocation; // The spawn location for the player after teleportation
     public TestingPortals connectedPortal; // The portal that this portal is connected to
-    private const float TeleportTime = 1.0f; // Time taken for teleportation
+    private const float TeleportTime = .075f; // Time taken for teleportation
     private const float TeleportCooldown = 1.5f; // Cooldown time between teleportations
     private bool _isTeleporting; // Flag to prevent multiple teleportations
     private bool _isOnCooldown; // Flag to prevent teleportation during cooldown
