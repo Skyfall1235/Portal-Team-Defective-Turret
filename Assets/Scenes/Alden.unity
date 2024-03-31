@@ -1192,17 +1192,17 @@ PrefabInstance:
     - target: {fileID: 7741548021094203536, guid: df5ef88340c95c34c99d949abf251b8c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 135.41
+      value: 184.91
       objectReference: {fileID: 0}
     - target: {fileID: 7741548021094203536, guid: df5ef88340c95c34c99d949abf251b8c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 26.07
+      value: 1.06
       objectReference: {fileID: 0}
     - target: {fileID: 7741548021094203536, guid: df5ef88340c95c34c99d949abf251b8c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 44.52
+      value: -87.53
       objectReference: {fileID: 0}
     - target: {fileID: 7741548021094203536, guid: df5ef88340c95c34c99d949abf251b8c,
         type: 3}
@@ -3152,7 +3152,7 @@ PrefabInstance:
     - target: {fileID: 598273553184173960, guid: 0689413c83c6ca5418200f396d0678d6,
         type: 3}
       propertyPath: visionDistance
-      value: 12.74
+      value: 29.15
       objectReference: {fileID: 0}
     - target: {fileID: 775808471971339324, guid: 0689413c83c6ca5418200f396d0678d6,
         type: 3}
@@ -3202,7 +3202,7 @@ PrefabInstance:
     - target: {fileID: 3542042907690534924, guid: 0689413c83c6ca5418200f396d0678d6,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.42184097
+      value: -0.458
       objectReference: {fileID: 0}
     - target: {fileID: 3542042907690534924, guid: 0689413c83c6ca5418200f396d0678d6,
         type: 3}
@@ -3212,7 +3212,7 @@ PrefabInstance:
     - target: {fileID: 3542042907690534924, guid: 0689413c83c6ca5418200f396d0678d6,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.38612676
+      value: 0.451
       objectReference: {fileID: 0}
     - target: {fileID: 3542042907690534924, guid: 0689413c83c6ca5418200f396d0678d6,
         type: 3}
@@ -3973,7 +3973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f8d9b5f70d8a044c98e276db8a0582f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnLocation: {fileID: 0}
+  spawnLocation: {fileID: 1933672807}
   connectedPortal: {fileID: 1661364363}
 --- !u!1 &623555593 stripped
 GameObject:

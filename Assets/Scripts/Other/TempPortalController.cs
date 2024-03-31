@@ -38,35 +38,49 @@ public class TempPortalController : MonoBehaviour
         Vector3 initialPosition = player.position;
         Transform targetPosition = connectedPortal.spawnLocation;
 
-        while (elapsedTeleportationTime < TeleportTime)
-        {
-            float time = elapsedTeleportationTime / TeleportTime;
-            //Lerp the players position to the target position
-            player.position = Vector3.Lerp(initialPosition, targetPosition.position, time);
-            //Slerp the players rotation to the target's rotation
-            player.localRotation = Quaternion.Slerp(player.localRotation, targetPosition.localRotation, time);
-
-            elapsedTeleportationTime += Time.deltaTime;
-            yield return null;
-        }
+        // while (elapsedTeleportationTime < TeleportTime)
+        // {
+        //     float time = elapsedTeleportationTime / TeleportTime;
+        //     //Lerp the players position to the target position
+        //     player.position = Vector3.Lerp(initialPosition, targetPosition.position, time);
+        //     //Slerp the players rotation to the target's rotation
+        //     player.localRotation = Quaternion.Slerp(player.localRotation, targetPosition.localRotation, time);
+        //
+        //     elapsedTeleportationTime += Time.deltaTime;
+        //     yield return null;
+        // }
+        
+        CharacterController characterController = player.gameObject.GetComponent<CharacterController>();
+        characterController.enabled = false;
 
         // Move player to the spawn location of the connected portal
         player.position = targetPosition.position;
         // Change the rotation of the player to the targetPosition's rotation
         player.rotation = targetPosition.rotation;
 
+        yield return null;
+        
+        if (player.position == targetPosition.position && player.rotation == targetPosition.rotation)
+        {
+            characterController.enabled = true;
+            Debug.Log("Re enabling character controller");
+        }
+        
         // Start cooldown on the connected portal
         connectedPortal._isOnCooldown = true;
+        _isOnCooldown = true;
         _cooldownCoroutine = StartCoroutine(StartTeleportCooldown());
 
         // Reset teleporting flag
         _isTeleporting = false;
+        
     }
 
     private IEnumerator StartTeleportCooldown()
     {
         yield return new WaitForSeconds(TeleportCooldown);
 
+        _isOnCooldown = false;
         connectedPortal._isOnCooldown = false;
     }
 
@@ -74,12 +88,12 @@ public class TempPortalController : MonoBehaviour
     //---------------------------------------------------------------------
     //Re enable this to see a line from this portal to the connected portal
     //---------------------------------------------------------------------
-    // private void OnDrawGizmosSelected()
-    // {
-    //     if (connectedPortal != null)
-    //     {
-    //         Gizmos.color = Color.blue;
-    //         Gizmos.DrawLine(transform.position, connectedPortal.transform.position);
-    //     }
-    // }
+    private void OnDrawGizmosSelected()
+    {
+        if (connectedPortal != null)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(transform.position, connectedPortal.spawnLocation.transform.position);
+        }
+    }
 }

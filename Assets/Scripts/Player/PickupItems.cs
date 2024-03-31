@@ -71,6 +71,9 @@ public class PickupItems : MonoBehaviour
         }
     }
     
+    //ON TELEPORT, OBJECT SHOULD STAY WITH PLAYER. MAKE A METHOD TO RESET THE PICKUPS POSITION TO THE PLAYERS WITH A 
+    //SMALL OFFSET
+    
     private void HoldPickup()
     {
         if (_currentPickup == null) return;
