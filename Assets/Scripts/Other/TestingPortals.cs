@@ -5,8 +5,8 @@ public class TestingPortals : MonoBehaviour
 {
     public Transform spawnLocation; // The spawn location for the player after teleportation
     public TestingPortals connectedPortal; // The portal that this portal is connected to
-    private const float TeleportTime = .075f; // Time taken for teleportation
-    private const float TeleportCooldown = 1.5f; // Cooldown time between teleportations
+    private const float TeleportTime = .1f; // Time taken for teleportation
+    private const float TeleportCooldown = 3.0f; // Cooldown time between teleportations
     private bool _isTeleporting; // Flag to prevent multiple teleportations
     private bool _isOnCooldown; // Flag to prevent teleportation during cooldown
     private Coroutine _cooldownCoroutine; // Coroutine for cooldown
@@ -46,8 +46,8 @@ public class TestingPortals : MonoBehaviour
         // Change the rotation of the player to the targetPosition's rotation
         player.rotation = targetPosition.rotation;
 
-        // Start cooldown
-        _isOnCooldown = true;
+        // Start cooldown on the connected portal
+        connectedPortal._isOnCooldown = true;
         _cooldownCoroutine = StartCoroutine(StartTeleportCooldown());
 
         // Reset teleporting flag
@@ -58,16 +58,19 @@ public class TestingPortals : MonoBehaviour
     {
         yield return new WaitForSeconds(TeleportCooldown);
 
-        _isOnCooldown = false;
+        connectedPortal._isOnCooldown = false;
     }
 
 
-    private void OnDrawGizmosSelected()
-    {
-        if (connectedPortal != null)
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawLine(transform.position, connectedPortal.transform.position);
-        }
-    }
+    //---------------------------------------------------------------------
+    //Re enable this to see a line from this portal to the connected portal
+    //---------------------------------------------------------------------
+    // private void OnDrawGizmosSelected()
+    // {
+    //     if (connectedPortal != null)
+    //     {
+    //         Gizmos.color = Color.blue;
+    //         Gizmos.DrawLine(transform.position, connectedPortal.transform.position);
+    //     }
+    // }
 }
