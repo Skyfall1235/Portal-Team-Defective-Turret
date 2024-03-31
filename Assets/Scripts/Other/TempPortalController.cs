@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 /* Assignment: Portal
@@ -8,19 +9,21 @@ using UnityEngine;
 */
 
 
-public class TestingPortals : MonoBehaviour
+public class TempPortalController : MonoBehaviour
 {
     public Transform spawnLocation; // The spawn location for the player after teleportation
-    public TestingPortals connectedPortal; // The portal that this portal is connected to
+    public TempPortalController connectedPortal; // The portal that this portal is connected to
     private const float TeleportTime = .1f; // Time taken for teleportation
     private const float TeleportCooldown = 3.0f; // Cooldown time between teleportations
     private bool _isTeleporting; // Flag to prevent multiple teleportations
     private bool _isOnCooldown; // Flag to prevent teleportation during cooldown
     private Coroutine _cooldownCoroutine; // Coroutine for cooldown
-
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (!_isTeleporting && !_isOnCooldown && other.CompareTag("Player"))
+        if(!other.CompareTag("Player")) return; //if the collider isnt the player, return 
+        
+        if (!_isTeleporting && !_isOnCooldown && spawnLocation != null)
         {
             StartCoroutine(TeleportPlayer(other.transform));
         }
