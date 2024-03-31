@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 /* Assignment: Portal
@@ -85,9 +84,9 @@ public class TempPortalController : MonoBehaviour
     }
 
 
-    //---------------------------------------------------------------------
-    //Re enable this to see a line from this portal to the connected portal
-    //---------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------
+    //Re enable this to see a line from this portal to the connected portal's spawnlocation
+    //-------------------------------------------------------------------------------------
     private void OnDrawGizmosSelected()
     {
         if (connectedPortal != null)
