@@ -1,4 +1,9 @@
-using System;
+/* Assignment: Portal
+/  Programmer: Wyatt
+/  Class Section: SGD.285.4171
+/  Instructor: Locklear
+/  Date: 03/29/2024
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
