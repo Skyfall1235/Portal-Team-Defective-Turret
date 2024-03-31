@@ -123,6 +123,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &4823146 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4263932492264979840, guid: dabe25b78173a6b41beeba3eaa2b116b,
+    type: 3}
+  m_PrefabInstance: {fileID: 87733799}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6746818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -397,7 +403,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnLocation
       value: 
-      objectReference: {fileID: 943333948}
+      objectReference: {fileID: 4823146}
     - target: {fileID: 2258797840583196106, guid: dabe25b78173a6b41beeba3eaa2b116b,
         type: 3}
       propertyPath: connectedPortal
@@ -1808,7 +1814,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnLocation
       value: 
-      objectReference: {fileID: 336331793}
+      objectReference: {fileID: 1936235520}
     - target: {fileID: 2258797840583196106, guid: dabe25b78173a6b41beeba3eaa2b116b,
         type: 3}
       propertyPath: connectedPortal
@@ -2904,7 +2910,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnLocation
       value: 
-      objectReference: {fileID: 1937518387}
+      objectReference: {fileID: 1060034212}
     - target: {fileID: 2258797840583196106, guid: dabe25b78173a6b41beeba3eaa2b116b,
         type: 3}
       propertyPath: connectedPortal
@@ -3418,6 +3424,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1331652797703915773, guid: 3d07e7e015678294d974f81e1747d900,
     type: 3}
   m_PrefabInstance: {fileID: 748288251}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1060034212 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4263932492264979840, guid: dabe25b78173a6b41beeba3eaa2b116b,
+    type: 3}
+  m_PrefabInstance: {fileID: 943333946}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1120771779
 GameObject:
@@ -5742,6 +5754,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 369217353}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 89.457}
+--- !u!4 &1936235520 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4263932492264979840, guid: dabe25b78173a6b41beeba3eaa2b116b,
+    type: 3}
+  m_PrefabInstance: {fileID: 684329415}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1937518383 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2258797840583196106, guid: dabe25b78173a6b41beeba3eaa2b116b,
@@ -5844,6 +5862,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8941317739045350674, guid: 54057d5fe34453240808dda49493d0ad,
     type: 3}
   m_PrefabInstance: {fileID: 1677260673}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1997070399 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4263932492264979840, guid: dabe25b78173a6b41beeba3eaa2b116b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2119957864}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2020422801
 GameObject:
@@ -6288,7 +6312,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnLocation
       value: 
-      objectReference: {fileID: 684329417}
+      objectReference: {fileID: 1997070399}
     - target: {fileID: 2258797840583196106, guid: dabe25b78173a6b41beeba3eaa2b116b,
         type: 3}
       propertyPath: connectedPortal
