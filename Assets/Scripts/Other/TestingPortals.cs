@@ -1,5 +1,12 @@
 using System.Collections;
 using UnityEngine;
+/* Assignment: Portal
+/  Programmer: Alden Chappell
+/  Class Section: SGD.285.4171
+/  Instructor: Locklear
+/  Date: 03/30/2024
+*/
+
 
 public class TestingPortals : MonoBehaviour
 {
@@ -22,22 +29,21 @@ public class TestingPortals : MonoBehaviour
     private IEnumerator TeleportPlayer(Transform player)
     {
         _isTeleporting = true;
-
         
         // Start teleportation effect
-        float elapsedTime = 0f;
+        float elapsedTeleportationTime = 0f;
         Vector3 initialPosition = player.position;
         Transform targetPosition = connectedPortal.spawnLocation;
 
-        while (elapsedTime < TeleportTime)
+        while (elapsedTeleportationTime < TeleportTime)
         {
-            float t = elapsedTime / TeleportTime;
+            float time = elapsedTeleportationTime / TeleportTime;
             //Lerp the players position to the target position
-            player.position = Vector3.Lerp(initialPosition, targetPosition.position, t);
-            //Lerp the players rotation to the target's rotation
-            player.localRotation = Quaternion.Slerp(player.localRotation, targetPosition.localRotation, t);
+            player.position = Vector3.Lerp(initialPosition, targetPosition.position, time);
+            //Slerp the players rotation to the target's rotation
+            player.localRotation = Quaternion.Slerp(player.localRotation, targetPosition.localRotation, time);
 
-            elapsedTime += Time.deltaTime;
+            elapsedTeleportationTime += Time.deltaTime;
             yield return null;
         }
 
