@@ -36,11 +36,12 @@ public class TurretSphereVision : MonoBehaviour
     {
         SpottedTargets.Clear();
         Collider[] targetsInRadius = Physics.OverlapSphere(transform.position, visionDistance, shootableLayer);
- 
-        for(int i = 0; i < targetsInRadius.Length; i++)
+        for (int i = 0; i < targetsInRadius.Length; i++)
         {
-            if(Vector3.Angle(transform.forward, targetsInRadius[i].transform.position) < visionAngle / 2)
+            Vector3 targetDir = targetsInRadius[i].transform.position - transform.position;
+            if (Vector3.Angle(targetDir, transform.forward) < visionAngle / 2 || Vector3.Angle(targetDir, transform.forward) < visionAngle / 2)
             {
+
                 float distanceToTarget = Vector3.Distance(transform.position, targetsInRadius[i].transform.position);
                 Vector3 directionToTarget = (targetsInRadius[i].transform.position - transform.position).normalized;
 
@@ -67,5 +68,10 @@ public class TurretSphereVision : MonoBehaviour
             angleInDegrees += transform.eulerAngles.y;
         }
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, visionDistance);
     }
 }
