@@ -27,7 +27,7 @@ public class BulletScript : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             other.GetComponent<PlayerStats>().CancelInvoke();
-            other.GetComponent<PlayerStats>().Invoke("DecreaseHealth", .2f);
+            other.GetComponent<PlayerStats>().DecreaseHealth();
            
 
         }
