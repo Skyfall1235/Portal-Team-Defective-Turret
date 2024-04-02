@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     //Uses original Input System
 
-    [SerializeField] CharacterController controller;
+    public CharacterController controller;
     [SerializeField] float speed;
 
     [SerializeField] float gravity = -9.81f;
@@ -19,33 +19,30 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     bool isGrounded;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool isTeleporting;
 
     // Update is called once per frame
     void Update()
     {
-        
-        if(IsGrounded(velocity))
+        if (!isTeleporting) // Only update movement when not teleporting
         {
-            velocity.y = -2f;
-        }
+            if (IsGrounded(velocity))
+            {
+                velocity.y = -2f;
+            }
 
-        Move();
-        Crouch(controller);
-   
-        if(Input.GetKeyDown(KeyCode.Space) && IsGrounded(velocity))
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-        }
+            Move();
+            Crouch(controller);
 
-        
-        velocity.y += gravity * Time.deltaTime;
-        
-        controller.Move(velocity * Time.deltaTime);
+            if (Input.GetKeyDown(KeyCode.Space) && IsGrounded(velocity))
+            {
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            }
+
+            velocity.y += gravity * Time.deltaTime;
+
+            controller.Move(velocity * Time.deltaTime);
+        }
     }
 
     private bool IsGrounded(Vector3 velocity)
@@ -89,18 +86,4 @@ public class PlayerMovement : MonoBehaviour
             controller.height *= 2;
         }
     }
-
-    private void Slide()
-    {
-
-    }
-
-
-    
-   
-
-    
-
-
-
 }

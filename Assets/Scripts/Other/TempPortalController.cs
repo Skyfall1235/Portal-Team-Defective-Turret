@@ -17,10 +17,13 @@ public class TempPortalController : MonoBehaviour
     private bool _isTeleporting; // Flag to prevent multiple teleportations
     private bool _isOnCooldown; // Flag to prevent teleportation during cooldown
     private Coroutine _cooldownCoroutine; // Coroutine for cooldown
-    
+
+    private PickupItems _playerPickups;
     private void OnTriggerEnter(Collider other)
     {
         if(!other.CompareTag("Player")) return; //if the collider isnt the player, return 
+
+        _playerPickups = other.GetComponent<PickupItems>();
         
         if (!_isTeleporting && !_isOnCooldown && spawnLocation != null)
         {
@@ -31,48 +34,39 @@ public class TempPortalController : MonoBehaviour
     private IEnumerator TeleportPlayer(Transform player)
     {
         _isTeleporting = true;
-        
-        // Start teleportation effect
-        float elapsedTeleportationTime = 0f;
-        Vector3 initialPosition = player.position;
+    
+        PlayerMovement playerController = player.gameObject.GetComponent<PlayerMovement>();
+        playerController.controller.enabled = false;
+
+        // Start teleportation 
         Transform targetPosition = connectedPortal.spawnLocation;
-
-        // while (elapsedTeleportationTime < TeleportTime)
-        // {
-        //     float time = elapsedTeleportationTime / TeleportTime;
-        //     //Lerp the players position to the target position
-        //     player.position = Vector3.Lerp(initialPosition, targetPosition.position, time);
-        //     //Slerp the players rotation to the target's rotation
-        //     player.localRotation = Quaternion.Slerp(player.localRotation, targetPosition.localRotation, time);
-        //
-        //     elapsedTeleportationTime += Time.deltaTime;
-        //     yield return null;
-        // }
-        
-        CharacterController characterController = player.gameObject.GetComponent<CharacterController>();
-        characterController.enabled = false;
-
+    
         // Move player to the spawn location of the connected portal
         player.position = targetPosition.position;
         // Change the rotation of the player to the targetPosition's rotation
         player.rotation = targetPosition.rotation;
 
-        yield return null;
-        
-        if (player.position == targetPosition.position && player.rotation == targetPosition.rotation)
-        {
-            characterController.enabled = true;
-            Debug.Log("Re enabling character controller");
-        }
-        
+        playerController.isTeleporting = true;
+
+        yield return new WaitForSeconds(TeleportTime);
+
+        playerController.controller.enabled = true; // Re-enable the CharacterController after teleportation
+        playerController.isTeleporting = false;
+
         // Start cooldown on the connected portal
         connectedPortal._isOnCooldown = true;
         _isOnCooldown = true;
         _cooldownCoroutine = StartCoroutine(StartTeleportCooldown());
 
+        //Respawn the pickup upon teleporting so the player doesn't lose it.
+        if (_playerPickups.currentPickup != null) 
+        {
+            _playerPickups.currentPickup.RespawnPickupInFrontOfPlayer(player.gameObject);
+        }
+        
+
         // Reset teleporting flag
         _isTeleporting = false;
-        
     }
 
     private IEnumerator StartTeleportCooldown()
