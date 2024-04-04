@@ -12,6 +12,7 @@ public class TurretShoot : MonoBehaviour
 
     bool startedShooting;
 
+    [SerializeField] private float fireDelay = .1f; //Time between each turret shot.
     private void Start()
     {
         tSV = GetComponentInParent<TurretSphereVision>();
@@ -42,7 +43,8 @@ public class TurretShoot : MonoBehaviour
         int barrelIndex = 0;
         while(true)
         {
-            yield return new WaitForSeconds(.1f);
+            //Added a fire delay to add balance - Alden
+            yield return new WaitForSeconds(fireDelay);
            
             for(int i = 0; i < pooledBullets.Length; i++)
             {
