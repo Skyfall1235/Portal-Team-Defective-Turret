@@ -13,9 +13,12 @@ public class TurretShoot : MonoBehaviour
     bool startedShooting;
 
     [SerializeField] private float fireDelay = .1f; //Time between each turret shot.
+    
+    private TurretSound _turretSound;
     private void Start()
     {
         tSV = GetComponentInParent<TurretSphereVision>();
+        _turretSound = GetComponentInParent<TurretSound>();
         pooledBullets = GameObject.Find("BulletPool").GetComponent<BulletList>().GetPooledBullets;
 
         InvokeRepeating("CheckForTargets", .2f, .2f);
@@ -46,6 +49,9 @@ public class TurretShoot : MonoBehaviour
             //Added a fire delay to add balance - Alden
             yield return new WaitForSeconds(fireDelay);
            
+            //Invoke the turret shooting event
+            _turretSound.onShootTurretEvent.Invoke();
+            
             for(int i = 0; i < pooledBullets.Length; i++)
             {
                 if(pooledBullets[i].activeSelf == false)

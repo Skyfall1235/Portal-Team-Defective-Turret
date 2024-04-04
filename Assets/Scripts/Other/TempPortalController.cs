@@ -19,6 +19,9 @@ public class TempPortalController : MonoBehaviour
     private Coroutine _cooldownCoroutine; // Coroutine for cooldown
 
     private PickupItems _playerPickups;
+
+    [SerializeField] private GameObject teleportEffect;
+    
     private void OnTriggerEnter(Collider other)
     {
         if(!other.CompareTag("Player")) return; //if the collider isnt the player, return 
@@ -48,6 +51,9 @@ public class TempPortalController : MonoBehaviour
 
         playerController.isTeleporting = true;
 
+        //Instantiate the teleport effect
+        GameObject tPEffect = Instantiate(teleportEffect, connectedPortal.spawnLocation.position, Quaternion.identity);        
+        
         yield return new WaitForSeconds(TeleportTime);
 
         playerController.controller.enabled = true; // Re-enable the CharacterController after teleportation
@@ -67,6 +73,10 @@ public class TempPortalController : MonoBehaviour
 
         // Reset teleporting flag
         _isTeleporting = false;
+        
+        //Wait to Destroy the teleport effect
+        yield return new WaitForSeconds(3.5f);
+        Destroy(tPEffect);
     }
 
     private IEnumerator StartTeleportCooldown()

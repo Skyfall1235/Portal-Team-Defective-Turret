@@ -13,7 +13,7 @@ public class TurretRotation : MonoBehaviour
     {
         tSV = GetComponentInParent<TurretSphereVision>();
         originalRotation = transform.rotation;
-        print(barrels.Length);
+        //print(barrels.Length);
     }
 
     private void Update()
@@ -27,7 +27,7 @@ public class TurretRotation : MonoBehaviour
            
             for (int i = 0; i < barrels.Length; i++)
             {
-                print("rotating");
+                //print("rotating");
                 Vector3 barrelDirection = (tSV.SpottedTargets[0].position - barrels[i].position).normalized;
                 Quaternion barrelRotation = Quaternion.LookRotation(barrelDirection, Vector3.up);
                 barrels[i].rotation = barrelRotation;

@@ -95,7 +95,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f9caa889e636e394a9c02e3a129a07f5, type: 2}
+  - {fileID: 2100000, guid: d4c406b5d941319458ddccf4b6f76be3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -152,3 +152,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnLocation: {fileID: 0}
   connectedPortal: {fileID: 0}
+  teleportEffect: {fileID: 5904183539813641210, guid: 7a9efb4ea2619494b972437db571bd93,
+    type: 3}
