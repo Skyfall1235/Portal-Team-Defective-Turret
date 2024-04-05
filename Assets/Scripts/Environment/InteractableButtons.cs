@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class InteractableButtons : MonoBehaviour
 {
-    [SerializeField] GameObject door;
     public UnityEvent<bool> OnCollision = new UnityEvent<bool>();
 
     [SerializeField] private GameObject explosion;
@@ -43,4 +42,5 @@ public class InteractableButtons : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         Destroy(explosionObj);
     }
+
 }

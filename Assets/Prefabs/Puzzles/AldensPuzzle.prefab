@@ -5153,6 +5153,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 154882576461741939}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8056451901156315658 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7919585099792215417, guid: 3d07e7e015678294d974f81e1747d900,
+    type: 3}
+  m_PrefabInstance: {fileID: 154882576461741939}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &330194477353961989
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5600,7 +5606,7 @@ PrefabInstance:
         type: 3}
       propertyPath: OnCollision.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1179023687121778574}
+      objectReference: {fileID: 8056451901156315658}
     - target: {fileID: 2051627136948778531, guid: 54057d5fe34453240808dda49493d0ad,
         type: 3}
       propertyPath: OnCollision.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
@@ -7109,6 +7115,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3859352784790989468}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6370104559481047013 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7919585099792215417, guid: 3d07e7e015678294d974f81e1747d900,
+    type: 3}
+  m_PrefabInstance: {fileID: 3859352784790989468}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7981661255321480671 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6578530314712172355, guid: 3d07e7e015678294d974f81e1747d900,
@@ -7657,7 +7669,7 @@ PrefabInstance:
         type: 3}
       propertyPath: OnCollision.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8688222521126737240}
+      objectReference: {fileID: 504468869379109084}
     - target: {fileID: 2051627136948778531, guid: 54057d5fe34453240808dda49493d0ad,
         type: 3}
       propertyPath: OnCollision.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -8412,7 +8424,7 @@ PrefabInstance:
         type: 3}
       propertyPath: OnCollision.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2879444769210999393}
+      objectReference: {fileID: 6370104559481047013}
     - target: {fileID: 2051627136948778531, guid: 54057d5fe34453240808dda49493d0ad,
         type: 3}
       propertyPath: OnCollision.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -9632,6 +9644,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d07e7e015678294d974f81e1747d900, type: 3}
+--- !u!1 &504468869379109084 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7919585099792215417, guid: 3d07e7e015678294d974f81e1747d900,
+    type: 3}
+  m_PrefabInstance: {fileID: 7703476929227316645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3576875172630371046 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6578530314712172355, guid: 3d07e7e015678294d974f81e1747d900,
