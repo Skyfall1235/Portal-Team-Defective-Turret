@@ -131,11 +131,35 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 633763336506504795, guid: d9d9fdc448a52224a813f80ce6f4213a,
+        type: 3}
+      propertyPath: teleportEffect
+      value: 
+      objectReference: {fileID: 5904183539813641210, guid: 7a9efb4ea2619494b972437db571bd93,
+        type: 3}
+    - target: {fileID: 779617331345980104, guid: d9d9fdc448a52224a813f80ce6f4213a,
+        type: 3}
+      propertyPath: teleportEffect
+      value: 
+      objectReference: {fileID: 5904183539813641210, guid: 7a9efb4ea2619494b972437db571bd93,
+        type: 3}
+    - target: {fileID: 964825841485788560, guid: d9d9fdc448a52224a813f80ce6f4213a,
+        type: 3}
+      propertyPath: teleportEffect
+      value: 
+      objectReference: {fileID: 5904183539813641210, guid: 7a9efb4ea2619494b972437db571bd93,
+        type: 3}
     - target: {fileID: 4401401814598223540, guid: d9d9fdc448a52224a813f80ce6f4213a,
         type: 3}
       propertyPath: m_Name
       value: AldensPuzzle
       objectReference: {fileID: 0}
+    - target: {fileID: 6148591501688904789, guid: d9d9fdc448a52224a813f80ce6f4213a,
+        type: 3}
+      propertyPath: teleportEffect
+      value: 
+      objectReference: {fileID: 5904183539813641210, guid: 7a9efb4ea2619494b972437db571bd93,
+        type: 3}
     - target: {fileID: 7411670112787009360, guid: d9d9fdc448a52224a813f80ce6f4213a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -186,6 +210,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8510697719363629164, guid: d9d9fdc448a52224a813f80ce6f4213a,
+        type: 3}
+      propertyPath: teleportEffect
+      value: 
+      objectReference: {fileID: 5904183539813641210, guid: 7a9efb4ea2619494b972437db571bd93,
+        type: 3}
+    - target: {fileID: 8826174648859238379, guid: d9d9fdc448a52224a813f80ce6f4213a,
+        type: 3}
+      propertyPath: teleportEffect
+      value: 
+      objectReference: {fileID: 5904183539813641210, guid: 7a9efb4ea2619494b972437db571bd93,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
