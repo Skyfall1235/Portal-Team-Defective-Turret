@@ -939,6 +939,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b86d8cdac80bf504aab6361610dd09e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idleSounds:
+  - {fileID: 8300000, guid: ea28ceeb333a5b14f9afcff2ddd4ed37, type: 3}
+  - {fileID: 8300000, guid: 2d72bf8d92b81004dacf52212fc2fd10, type: 3}
+  - {fileID: 8300000, guid: 2d72bf8d92b81004dacf52212fc2fd10, type: 3}
   onShootTurretEvent:
     m_PersistentCalls:
       m_Calls:

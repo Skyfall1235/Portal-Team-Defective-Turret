@@ -9,13 +9,20 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] TMP_Text healthText;
 
     [SerializeField] private bool invincible;
-    
+    AssignableAudio hitSound;
+
+    private void Start()
+    {
+        hitSound = GetComponent<AssignableAudio>();
+    }
+
     public void DecreaseHealth()
     {
         if (!invincible)
         {
             playerHealth -= 15;
             healthText.text = playerHealth.ToString() + "%";
+            hitSound.onPlaySoundEvent.Invoke();
             if(playerHealth <= 0)
             {
                 GetComponentInChildren<PlayerUIManager>().deathScreen.SetActive(true);

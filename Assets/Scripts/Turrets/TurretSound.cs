@@ -9,6 +9,8 @@ using UnityEngine.Events;
 public class TurretSound : MonoBehaviour
 {
     private AudioSource _turretAudio;
+    [SerializeField] bool playIdleSounds;
+    [SerializeField] AudioClip[] idleSounds;
 
     public UnityEvent onShootTurretEvent;
     private void Awake()
@@ -16,8 +18,22 @@ public class TurretSound : MonoBehaviour
         _turretAudio = GetComponent<AudioSource>();
     }
 
+    private void Start()
+    {
+        if(playIdleSounds)
+        {
+            InvokeRepeating("PlayTurretIdleSound", 4f, 4f);
+        }
+    }
+
     public void PlayTurretSound(AudioClip sound)
     {
         _turretAudio.PlayOneShot(sound);
+    }
+
+    private void PlayTurretIdleSound()
+    {
+        int index = Random.Range(0, idleSounds.Length);
+        _turretAudio.PlayOneShot(idleSounds[index]);
     }
 }
