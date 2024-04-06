@@ -25,6 +25,7 @@ public class PlayerStats : MonoBehaviour
             hitSound.onPlaySoundEvent.Invoke();
             if(playerHealth <= 0)
             {
+                GetComponent<CharacterController>().enabled = false;
                 GetComponentInChildren<PlayerUIManager>().deathScreen.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
             }
