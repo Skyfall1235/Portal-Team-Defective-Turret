@@ -21,7 +21,6 @@ public class WaypointMovementSequencer : MonoBehaviour
     public GameObject chosenObjectToMove;
 
     // Control fields for movement
-    [SerializeField] private AnimationCurve speedCurveAlongTravel;
     [SerializeField] private bool goingForward = true;
     [SerializeField] private float speedOfTravel;
 
@@ -62,27 +61,31 @@ public class WaypointMovementSequencer : MonoBehaviour
 
     private IEnumerator MoveObject()
     {
+        Vector3 startPosition = chosenObjectToMove.transform.position;
+        Vector3 endPosition = gameobjectWayPoints[indexOfNextWaypoint].transform.position;
+        float distance = Vector3.Distance(startPosition, endPosition);
         float timeElapsed = 0f;
 
         while (timeElapsed < 1f)
         {
-            //get the speed of travel per frame and get the evaluation of the animation graph
-            float speed = speedOfTravel * speedCurveAlongTravel.Evaluate(timeElapsed);
-            float lerpValue = Mathf.Lerp(0f, 1f, timeElapsed * speed);
-            //lerp based on the index
+            // Calculate lerpValue based on the actual time elapsed
+            float lerpValue = Mathf.SmoothStep(0f, 1f, timeElapsed);
             chosenObjectToMove.transform.position = Vector3.Lerp(
-                gameobjectWayPoints[lastCompletedWaypoint].transform.position,
-                gameobjectWayPoints[indexOfNextWaypoint].transform.position,
+                startPosition,
+                endPosition,
                 lerpValue);
 
-            timeElapsed += Time.deltaTime;
+            // Update timeElapsed based on the distance and speedOfTravel
+            timeElapsed += Time.deltaTime * speedOfTravel / distance;
             yield return null;
         }
-        //when done with a movement, set the transform and invoke the unity event and next movement
-        chosenObjectToMove.transform.position = gameobjectWayPoints[indexOfNextWaypoint].transform.position;
+
+        // Ensure the object reaches the exact end position
+        chosenObjectToMove.transform.position = endPosition;
         completedWaypoint.Invoke(indexOfNextWaypoint);
         UpdateCompletionWaypoints();
     }
+
 
     #endregion
 
