@@ -1609,11 +1609,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: WyattsPuzzle
       objectReference: {fileID: 0}
-    - target: {fileID: 6376037850342172211, guid: 6e778ff5204adf746a680f414147e25b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8860951513600305939, guid: 6e778ff5204adf746a680f414147e25b,
         type: 3}
       propertyPath: m_LocalPosition.x
