@@ -61,6 +61,7 @@ public class WaypointMovementSequencer : MonoBehaviour
 
     private IEnumerator MoveObject()
     {
+        //Define needed variables
         Vector3 startPosition = chosenObjectToMove.transform.position;
         Vector3 endPosition = gameobjectWayPoints[indexOfNextWaypoint].transform.position;
         float distance = Vector3.Distance(startPosition, endPosition);
@@ -120,5 +121,36 @@ public class WaypointMovementSequencer : MonoBehaviour
     }
 
     #endregion
+
+    private void OnDrawGizmosSelected()
+    {
+        DrawRaysToNextObject(gameobjectWayPoints);
+    }
+
+    void DrawRaysToNextObject(List<GameObject> objectList)
+    {
+        if (objectList == null || objectList.Count < 2)
+        {
+            Debug.LogError("List is null or has less than 2 objects!");
+            return;
+        }
+
+        for (int i = 0; i < objectList.Count - 1; i++)
+        {
+            GameObject currentObject = objectList[i];
+            GameObject nextObject = objectList[i + 1];
+
+            if (currentObject == null || nextObject == null)
+            {
+                Debug.LogError("Found a null object in the list at index: " + i);
+                continue;
+            }
+
+            Vector3 origin = currentObject.transform.position;
+            Vector3 direction = nextObject.transform.position - origin;
+            Debug.DrawRay(origin, direction, Color.red);
+        }
+    }
+
 }
 

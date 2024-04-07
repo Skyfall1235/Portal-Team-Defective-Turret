@@ -1,10 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 /* Assignment: Portal
 /  Programmer: Alden Chappell
 /  Class Section: SGD.285.4171
 /  Instructor: Locklear
 /  Date: 03/30/2024
+/  Edits: Wyatt 4/7/2024, 
 */
 
 
@@ -16,12 +18,14 @@ public class TempPortalController : MonoBehaviour
     private const float TeleportCooldown = 3.0f; // Cooldown time between teleportations
     private bool _isTeleporting; // Flag to prevent multiple teleportations
     private bool _isOnCooldown; // Flag to prevent teleportation during cooldown
-    private Coroutine _cooldownCoroutine; // Coroutine for cooldown
 
     private PickupItems _playerPickups;
 
     [SerializeField] private GameObject teleportEffect;
-    
+
+    //added unity event to play audio for triggered events
+    public UnityEvent onTeleportEvent = new();
+
     private void OnTriggerEnter(Collider other)
     {
         if(!other.CompareTag("Player")) return; //if the collider isnt the player, return 
@@ -59,10 +63,12 @@ public class TempPortalController : MonoBehaviour
         playerController.controller.enabled = true; // Re-enable the CharacterController after teleportation
         playerController.isTeleporting = false;
 
+
         // Start cooldown on the connected portal
         connectedPortal._isOnCooldown = true;
         _isOnCooldown = true;
-        _cooldownCoroutine = StartCoroutine(StartTeleportCooldown());
+        connectedPortal.PlayOnRecieveTeleport();
+        StartCoroutine(StartTeleportCooldown());
 
         //Respawn the pickup upon teleporting so the player doesn't lose it.
         if (_playerPickups.currentPickup != null) 
@@ -77,6 +83,11 @@ public class TempPortalController : MonoBehaviour
         //Wait to Destroy the teleport effect
         yield return new WaitForSeconds(3.5f);
         Destroy(tPEffect);
+    }
+
+    public void PlayOnRecieveTeleport()
+    {
+        onTeleportEvent.Invoke();
     }
 
     private IEnumerator StartTeleportCooldown()
