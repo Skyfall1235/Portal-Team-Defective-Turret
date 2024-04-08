@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 class PlayerUIManager : MonoBehaviour
 {
     public GameObject deathScreen;
+    public GameObject winScreen;
     public void OnRestartButtonPress()
     {
         print("Pressed");
