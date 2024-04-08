@@ -6,7 +6,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-class PlayerUIManager : MonoBehaviour
+public class PlayerUIManager : MonoBehaviour
 {
     public GameObject deathScreen;
     public GameObject winScreen;
