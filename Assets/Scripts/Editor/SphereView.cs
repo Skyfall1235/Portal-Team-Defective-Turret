@@ -2,7 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-
+/* Assignment: Portal
+/  Programmer: Owen Jones
+/  Class Section: SGD.285.4171
+/  Instructor: Locklear
+/  Date: 04/07/2024
+*/
 [CustomEditor(typeof(TurretSphereVision))]
 public class SphereView : Editor
 {

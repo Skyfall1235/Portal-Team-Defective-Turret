@@ -1,7 +1,8 @@
 /* Assignment: Portal
-/  Programmer: FILL NAME HERE
+/  Programmer: Owen Jones
 /  Class Section: SGD.285.4171
 /  Instructor: Locklear
+/  Date: 04/07/2024
 */
 using System.Collections;
 using UnityEngine;
