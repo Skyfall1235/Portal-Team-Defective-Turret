@@ -1,6 +1,3 @@
-using System.Collections;
-using UnityEngine;
-using UnityEngine.Events;
 /* Assignment: Portal
 /  Programmer: Alden Chappell
 /  Class Section: SGD.285.4171
@@ -8,7 +5,9 @@ using UnityEngine.Events;
 /  Date: 03/30/2024
 /  Edits: Wyatt 4/7/2024, 
 */
-
+using System.Collections;
+using UnityEngine;
+using UnityEngine.Events;
 
 public class TempPortalController : MonoBehaviour
 {

@@ -1,5 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+/* Assignment: Portal
+/  Programmer: Owen Jones
+/  Class Section: SGD.285.4171
+/  Instructor: Locklear
+*/
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

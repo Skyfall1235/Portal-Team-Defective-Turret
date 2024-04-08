@@ -1,5 +1,9 @@
+/* Assignment: Portal
+/  Programmer: FILL NAME HERE
+/  Class Section: SGD.285.4171
+/  Instructor: Locklear
+*/
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 

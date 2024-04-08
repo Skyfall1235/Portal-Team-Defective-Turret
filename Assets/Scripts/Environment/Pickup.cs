@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 /* Assignment: Portal
 /  Programmer: Alden Chappell

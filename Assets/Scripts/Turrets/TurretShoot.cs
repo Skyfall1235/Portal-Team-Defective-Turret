@@ -1,7 +1,10 @@
+/* Assignment: Portal
+/  Programmer: owen Jones
+/  Class Section: SGD.285.4171
+/  Instructor: Locklear
+*/
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class TurretShoot : MonoBehaviour
 {
